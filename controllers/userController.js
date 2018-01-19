@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.route("/login")
 	.get((req, res) => {
-		res.render("login.ejs", {
+		res.render("users/login.ejs", {
 			message: "Placeholder"
 		})
 	})
@@ -12,12 +12,12 @@ router.route("/login")
 
 router.route("/register")
 	.get((req, res) => {
-		res.render("register.ejs")
+		res.render("users/register.ejs")
 	})
 
 router.route("/watchlist")
 	.get((req, res) => {
-		res.render("watch-list.ejs")
+		res.render("users/watch-list.ejs")
 	})
 
 
