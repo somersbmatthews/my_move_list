@@ -26,7 +26,11 @@ app.use(methodOverride('_method'))
 app.use(express.static("public"));
 
 
-
+/*
+Controllers
+*/
+const userController = require("./controllers/userController.js");
+app.use("/users", userController)
 
 
 
