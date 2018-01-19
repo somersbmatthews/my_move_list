@@ -1,10 +1,11 @@
 ## My Movie List
 
+#### What technologies were used?
+
 #### User Stories MVP:
 1.  Create account/Login to account 
 
 2. Select prefered genres 
-*add additional criteria*
 
 3. Logout of their account
 
@@ -30,5 +31,6 @@
 * Add selected move to their “Already watched list”
 * Rate and review movies they have watched
 * See recommendations on their homepage based off of their watched history
-* See other users ratings and reviews on the movie specific pages
+* See other users ratings and reviews on the movie specific pages 
+* Able to add additional criteria to preferences  
  
