@@ -1,12 +1,16 @@
-<!doctype html>
-<html>
-<head>
-    <title>Movie Results</title>
+<%include ../partials/movieshead.ejs%>
+<h1>Search results for <%=test[0].username%></h1>
 
-</head>
-<body>
 
-<%include ../partials/moviesheader.ejs%>
 
-</body>
-</html>
+<% for (let i = 0; i < test.length; i++) { -%>
+	Title for search result <%=i+1%> is "<%=test[i].title%>"<br>
+	Rating is <%=test[i].rating%> <br>
+	It was released on <%=test[i].releaseDate%> <br>
+	<br>
+	<br>
+<% } -%>
+
+
+
+<%include ../partials/moviesfooter.ejs%>

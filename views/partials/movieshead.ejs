@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+	 <link type="text/css" href="/css/style.css" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+	<nav>
+		<span>
+			<a href="/users/login">Login</a>
+			<a href="/users/register">Registration</a>
+			<a href="/movies/home">Movies</a>
+			<a href="/users/watchlist">Movies To See</a>
+		</span>
+		<button id="searchIcon">Search</button>
+	</nav>
+</head>
+
+<header>
+	<div class="modal">
+	    <div class="modalContent">
+	        <form class="modalForm" action="/movies/results" method="POST">
+	            Movie Title: <input placeholder="Movie title" type="text">
+	            Genre: <input placeholder="Genre" type="text">
+	            At least Rating: <input placeholder="Rating" type="number">
+	            Actor/Actress: <input placeholder="Actor/Actress" type="text">
+	            Release Date: <input placeholder="Release Date" type="number">
+	            Max Number of Results: <input placeholder="Number" type="number" name="maxResults">
+	            <button id="submitSearch">Search</button>
+	        </form>
+	    </div>
+	</div>
+</header>
+<body>
