@@ -1,5 +1,6 @@
+// importing sample data
 const movieData = require('./models/sampleData.js')
-
+// class that goes in every movie object
 class Movie {
   constructor(username, searchNumber, title, releaseDate, Rating) {
   this.username = username;
@@ -10,7 +11,7 @@ class Movie {
   this.rating = Rating;
   }
 }	
-
+// factory class that makes the movies and puts them in an array of results
  class MovieFactory {
 	constructor(username, searchNumber){
 	
@@ -21,7 +22,8 @@ class Movie {
 	}
 	generateMovie() {
 	
-		
+		// assigns values in all the keys to go in the movie objects to items in the data
+		// in the future, the ajax call will have to pass the data to these variables somehow
 		const title = movieData.results[this.results.length].title;
 
 		const releaseDate = movieData.results[this.results.length].release_date;
@@ -34,7 +36,7 @@ class Movie {
 
 
 
-
+		// pushes new movies to array
 		this.results.push(newMovie);
 
 	}
