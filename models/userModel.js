@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-
-	username: String,
-	password: String,
-	preferences: {
-		favGenres: [Number],
-		favActors: [String]
-		
+	username: {
+		type: String,
+		require: true
 	},
+	password: {
+		type: String,
+		require: true
+	},
+	favGenres: [Number],
+	favActors: [String],
 	moviesToSee: [{
 		movieId: String, // Database Id
 		title: String,
@@ -17,7 +19,10 @@ const userSchema = new mongoose.Schema({
 		overview: String, // Plot summary
 		trailer: String, //SRC url
 		rating: Number,
-		watched: false
+		watched: {
+			type: Boolean,
+			default: false
+		},
 		userRating: Number,
 		userReview: String
 	}],
@@ -30,7 +35,10 @@ const userSchema = new mongoose.Schema({
 		overview: String, // Plot summary
 		trailer: String, //SRC url
 		rating: Number,
-		watched: true
+		watched: {
+			type: Boolean,
+			default: true
+		},
 		userRating: Number,
 		userReview: String
 	}]
