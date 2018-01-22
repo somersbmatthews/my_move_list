@@ -46,7 +46,7 @@ router.route("/register")
 				console.log(err);
 				res.send(err);
 			} else {
-				res.redirect("users/preferences")
+				res.redirect("/users/preferences")
 			}
 		})
 	})
@@ -65,6 +65,15 @@ router.route("/logout")
 router.route("/preferences")
 	.get((req, res) => {
 		res.render("users/preferences.ejs")
+	})
+	.post((req, res) => {
+		User.findOneAndUpdate({ username: req.session.username}, {$set: {favGenres: req.body.favGenre} }, (err, updatedUser) => {
+			if (err) {
+				console.log(err)
+			} else {
+				res.send(updatedUser);
+			}
+		})
 	})
 
 
