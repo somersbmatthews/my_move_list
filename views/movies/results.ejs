@@ -6,14 +6,19 @@
 <% if(body.results.length != 0){ %>
     <% for (let i = 0; i <= 5; i++) { %>
         <% if(body.results[i].vote_average > minRating){ %>
-             <h2><%= body.results[i].title %>(<%= body.results[i].release_date %>)</h2><br>
+             <% let date = body.results[i].release_date %>
+             <% let year = date.slice(0,4) %>
+             <h2><%= body.results[i].title %>(<%= year %>)</h2><br>
 
              User Score <%= body.results[i].vote_average %> <br>
 
              Overview: <%= body.results[i].overview %> <br>
-
+        <div class="container">
+            <img id="background" src="https://image.tmdb.org/t/p/w600/<%= body.results[i].backdrop_path %>">
+            <div class="top"><h2><%= body.results[i].title %>(<%= year %>)</h2></div>
             <img id="poster" src="https://image.tmdb.org/t/p/w300/<%= body.results[i].poster_path %>">
-            <img id="background" src="https://image.tmdb.org/t/p/w600/<%= body.results[i].backdrop_path %>"> <br>
+
+        </div>
         <% } %>
     <% } %>
 <% } else { %>

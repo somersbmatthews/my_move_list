@@ -2,14 +2,25 @@
     width: 300px;
     position: absolute;
     opacity: 1;
-    left: 20px;
+    left: 100px;
+    margin: -480px auto;
     z-index: 1;
 }
 #background {
-    width: 80vw;
-    height: 450px;
-    background: rgba(139, 0, 139, 0.6);
+    width: 99vw;
+    height: 500px;
+    /*background: rgba(139, 0, 139, 0.6);*/
     opacity: 0.6;
-
     position: relative;
+}
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.top {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 50px;
 }
