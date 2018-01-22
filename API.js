@@ -2,45 +2,91 @@
 const movieData = require('./models/sampleData.js')
 // class that goes in every movie object
 class Movie {
-  constructor(username, searchNumber, title, releaseDate, Rating) {
-  this.username = username;
-  this.searchNumber = searchNumber;
-  this.title = title;
- 
-  this.releaseDate = releaseDate;
-  this.rating = Rating;
-  }
-}	
-// factory class that makes the movies and puts them in an array of results
- class MovieFactory {
-	constructor(username, searchNumber){
+	constructor(movieId, title, genre, img, overview, trailer, releaseDate, rating){
 	
-		this.username = username;
-		this.searchNumber = searchNumber;
-		this.results = [];
-	
+	this.movieId = movieId;
+	this.title = title;
+	this.genre = genre;
+	this.img = img;
+	this.overview = overview;
+	this.trailer = trailer;
+	this.releaseDate = releaseDate;
+	this.rating = rating;
+	//console.log('the Movie constructor code is working')
 	}
-	generateMovie() {
-	
-		// assigns values in all the keys to go in the movie objects to items in the data
-		// in the future, the ajax call will have to pass the data to these variables somehow
-		const title = movieData.results[this.results.length].title;
-
-		const releaseDate = movieData.results[this.results.length].release_date;
-
-		const rating = movieData.results[this.results.length].vote_average;
-
-
-
-		const newMovie = new Movie(this.username, this.searchNumber, title, releaseDate, rating);
-
-
-
-		// pushes new movies to array
-		this.results.push(newMovie);
-
-	}
-
 }
 
-module.exports = MovieFactory;
+class Preferences {
+	constructor(favGenres, favActors) {
+		this.favGenres = favGenres;
+		this.favActors = favActors;
+	}
+}
+
+class UserMaker  {
+	constructor(username, password, preferences, moviesToSee, searchHistory, seenMovies){
+		this.username = username;
+		this.password = password;
+		this.preferences = {};
+		this.moviesToSee = [];
+		this.searchHistory = [];
+		this.seenMovies = [];
+	//	console.log('the user constructor code is working')
+	}
+	generatePreferences(){
+		
+
+		this.preferences.favGenres = null;
+		this.preferences.favActors = null;
+
+	}
+
+	generateMovieForArrays() {
+		//console.log('generate code for arrays function works')
+		const j = this.moviesToSee.length;
+
+		const posterSize = 'w500';
+
+		// parameters for new movie
+
+		const movieId = movieData.results[j].id;
+console.log(movieData.results[j].id);
+		const title = movieData.results[j].title;
+
+		const genre = 'poo';
+
+		const img	= 'https://image.tmdb.org/t/p/' + posterSize + movieData.results[j].poster_path
+
+		const overview = movieData.results[j].overview;
+
+		const trailer =	"trailer";
+
+		const releaseDate = movieData.results[j].release_date;
+
+		const rating = movieData.results[j].vote_average;
+
+		
+		// assigns values in all the keys to go in the movie objects to items in the data
+		// in the future, the ajax call will have to pass the data to these variables somehow
+
+		// console.log(movieId, title, genre, img, overview, trailer, releaseDate, rating)
+
+		
+		const newMovie = new Movie(movieId, title, genre, img, overview, trailer, releaseDate, rating);
+
+
+	//	console.log('this is new movie object', newMovie)
+
+		
+		// pushes new movies to array
+		this.moviesToSee.push(newMovie);
+		this.seenMovies.push(newMovie);
+
+		return newMovie;
+		
+	}
+
+
+
+}
+module.exports = UserMaker;
