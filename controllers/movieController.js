@@ -8,10 +8,9 @@ let minRating = 0;
 const discoverOptions = { method: 'GET',
 	  url: 'https://api.themoviedb.org/3/discover/movie',
 	  qs: 
-	   { primary_release_year: '',
-	   	 with_genres: "",
-	   	 with_cast: "",
-	   	 
+
+	   { primary_release_year: '2017',
+	   	 with_genres: 18,
 	   	 page: '',
 	     include_video: 'false',
 	     include_adult: 'false',
