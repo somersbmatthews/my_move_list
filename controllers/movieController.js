@@ -1,32 +1,53 @@
 const express = require('express');
+const request = require('request');
+
 const router = express.Router();
 
 // importing movieFactory class
 const User = require('../API.js')
 
+const apiKey = "c6ba51285da546e27050e39e5bf072be";
 
 let searchNumber = 0;
 
+
+
 router.get('/results', (req,res) =>{
-	console.log('the movies results route works')
-	// to be changed later from searchNumber to maxResults to go with search modal 
-	searchNumber++;
-	// fake user name to be in future in req.sessions object probably
-	const username = 'Fake User Name';
-	// instantiate the factory
-	const user = new User(username);
-	
 	
 
-	for (let i = 0; i < searchNumber; i++) {
-		user.generateMovieForArrays();
-		console.log(user);
-				// 		res.render('movies/results.ejs', {
-				// 	test: factory.results
 
-				// })
-	}
-		
+
+	const options = { method: 'GET',
+	  url: 'https://api.themoviedb.org/3/discover/movie',
+	  qs: 
+	   { primary_release_year: '2017',
+	   	 with_genres: '18',
+	   	 page: '1',
+	     include_video: 'false',
+	     include_adult: 'false',
+	     sort_by: 'popularity.desc',
+	     language: 'en-US',
+	     api_key: 'c6ba51285da546e27050e39e5bf072be' },
+	     body: '{}' 
+	 };
+
+	request(options, function (error, response, body) {
+	  if (error) throw new Error(error);
+		const bodyJSON = JSON.parse(body)
+		console.log(bodyJSON)
+	  	res.render('movies/results.ejs', {
+			body: bodyJSON
+	    });
+	    // console.log(body);
+	    // console.log(body.results)
+
+	 // res.send(body);
+
+//	  console.log(body);
+	});
+
+
+	
 })
 
 

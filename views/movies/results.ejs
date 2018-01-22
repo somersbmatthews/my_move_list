@@ -1,12 +1,12 @@
 <%include ../partials/movieshead.ejs%>
-<h1>Search results for <%=test[0].username%></h1>
+<h1>Search results for globalresponse</h1>
 
 
 
-<% for (let i = 0; i < test.length; i++) { -%>
-	Title for search result <%=i+1%> is "<%=test[i].title%>"<br>
-	Rating is <%=test[i].rating%> <br>
-	It was released on <%=test[i].releaseDate%> <br>
+<% for (let i = 0; i <=5; i++) { -%>
+	Title for search result <%=i+1%> is "<%=body.results[i].title%>"<br>
+	Rating is <%=body.results[i].vote_average%> <br>
+	It was released on <%=body.results[i].release_date%> <br>
 	<br>
 	<br>
 <% } -%>
