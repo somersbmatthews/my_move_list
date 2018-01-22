@@ -6,7 +6,25 @@ const bcrypt = require("bcrypt")
 router.route("/login")
 	.get((req, res) => {
 		res.render("users/login.ejs", {
-			message: "Placeholder"
+			message: req.session.message
+		})
+	})
+	.post((req, res) => {
+		User.findOne({ username: req.body.username }, (err, foundUser) => {
+			if(foundUser) {
+				if (bcrypt.compareSync(req.body.password, foundUser.password)) {
+					req.session.username = foundUser.username;
+					req.session.logged = true;
+					req.session.message = "";
+					res.redirect("movies/browse")
+				} else {
+					req.session.message = "Incorrect password or username";
+					res.redirect("/users/login");
+				}
+			} else {
+				req.session.message = "Incorrect password or username";
+				res.redirect("/users/login");
+			}
 		})
 	})
 
@@ -19,18 +37,16 @@ router.route("/register")
 		// res.send(req.body)
 		const password = req.body.password;
 		const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-
 		const userDBEntry = {
 			username: req.body.username,
 			password: passwordHash
-		}
-
+		}	
 		User.create(userDBEntry, (err, createdUser) => {
 			if (err) {
 				console.log(err);
 				res.send(err);
 			} else {
-				res.send("User created " +  createdUser)
+				res.redirect("users/preferences")
 			}
 		})
 	})
@@ -43,10 +59,13 @@ router.route("/watchlist")
 
 router.route("/logout")
 	.get((req, res) => {
-		console.log("User logged out")
 		res.redirect("/users/login")
 	})
 
+router.route("/preferences")
+	.get((req, res) => {
+		res.render("users/preferences.ejs")
+	})
 
 
 
