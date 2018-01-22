@@ -8,6 +8,7 @@ const options = { method: 'GET',
 	  qs: 
 	   { primary_release_year: '2017',
 	   	 with_genres: 18,
+	   	 with_cast: 
 	   	 "vote_average.gte": 7,
 	   	 page: '1',
 	     include_video: 'false',
