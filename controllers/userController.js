@@ -16,7 +16,7 @@ router.route("/login")
 					req.session.username = foundUser.username;
 					req.session.logged = true;
 					req.session.message = "";
-					res.redirect("movies/browse")
+					res.redirect("/movies/browse")
 				} else {
 					req.session.message = "Incorrect password or username";
 					res.redirect("/users/login");
@@ -33,8 +33,11 @@ router.route("/register")
 	.get((req, res) => {
 		res.render("users/register.ejs")
 	})
+
 	.post((req, res) => {
-		// res.send(req.body)
+		req.session.username = req.body.username;
+		req.session.logged = true;
+		req.session.message = "";
 		const password = req.body.password;
 		const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 		const userDBEntry = {
@@ -46,6 +49,7 @@ router.route("/register")
 				console.log(err);
 				res.send(err);
 			} else {
+				console.log(createdUser);
 				res.redirect("/users/preferences")
 			}
 		})
@@ -65,15 +69,20 @@ router.route("/logout")
 router.route("/preferences")
 	.get((req, res) => {
 		res.render("users/preferences.ejs")
+		console.log(req.session)
 	})
 	.post((req, res) => {
-		User.findOneAndUpdate({ username: req.session.username}, {$set: {favGenres: req.body.favGenre} }, (err, updatedUser) => {
-			if (err) {
-				console.log(err)
-			} else {
-				res.send(updatedUser);
+		User.findOneAndUpdate({ username: req.session.username},
+			{$set: {favGenres: req.body.favGenre, favActors: req.body.favActor} },
+
+			(err, updatedUser) => {
+				if (err) {
+					console.log(err)
+				} else {
+					res.send(updatedUser);
+				}
 			}
-		})
+		)
 	})
 
 
