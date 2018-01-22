@@ -2,6 +2,8 @@
 <link type="text/css" href="/css/searchPage.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
 
+<script src="https://use.fontawesome.com/d37a5741c5.js"></script>
+
 <h1>Search Results</h1>
 
 <% if(body.results.length != 0){ %>
@@ -18,7 +20,8 @@
             <div class="top">
                 <h2><%= body.results[i].title %>(<%= year %>)</h2>
                 <h3>User Score <%= body.results[i].vote_average %></h3>
-                <h4>Overview: <%= body.results[i].overview %></h4>
+                <p>Overview</p>
+                <h4><%= body.results[i].overview %></h4>
 
             </div>
             <img id="poster" src="https://image.tmdb.org/t/p/w300/<%= body.results[i].poster_path %>">

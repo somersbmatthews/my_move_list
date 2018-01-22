@@ -30,6 +30,11 @@
     bottom: 20px;
     right: 16px;
 }
+button i{
+    font-size: 20px;
+    color: white;
+    margin-left: 50px;
+}
 h1{
     font-family: 'Monoton', cursive;
     font-weight: normal;
@@ -44,4 +49,7 @@ h4{
     font-size: 20px;
     text-align: center;
     width: 60vw;
+}
+p{
+    font-size: 30px;
 }
