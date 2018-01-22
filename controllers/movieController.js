@@ -5,12 +5,13 @@ const apiKey = "c6ba51285da546e27050e39e5bf072be";
 
 let minRating = 0;
 
+
 const discoverOptions = { method: 'GET',
 	  url: 'https://api.themoviedb.org/3/discover/movie',
 	  qs: 
 
 	   { primary_release_year: '2017',
-	   	 with_genres: 18,
+	   	 with_genres: "",
 	   	 page: '',
 	     include_video: 'false',
 	     include_adult: 'false',
@@ -40,7 +41,7 @@ router.get('/results', (req,res) =>{
 		request(searchMoviesOptions, function (error, response, body) {
 	    	if (error) throw new Error(error);
 	    	const bodyJSON = JSON.parse(body)
-	    //	console.log('if there is a title enterered the body is: ', bodyJSON)
+	   	console.log('if there is a title enterered the body is: ', bodyJSON)
 	        	res.render('movies/results.ejs', {
 					body: bodyJSON,
 					minRating: minRating
