@@ -1,5 +1,38 @@
 body{
-
+    /*margin: 20% auto;*/
+    text-align: center;
+    /*font-family: 'Arvo', serif;*/
+    letter-spacing: 0.1em;
+    background-image: url('/public/curtains.JPEG');
+}
+h1{
+    margin: 10px auto;
+    padding-bottom: 100px;
+    word-spacing: .3em;
+    font-size: 70px;
+    font-family: 'Monoton', cursive;
+    font-weight: normal;
+    /*font-family: 'Raleway', sans-serif;*/
+}
+h2{
+    font-size: 30px;
+}
+button{
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 3px 25px 3px 25px;
+}
+button:hover{
+    color: white;
+    background-color: #007AFF;
+    border-radius: 5px;
+}
+input{
+    padding: 7px;
+    font-size: 20px;
+    text-align: center;
+    border-style: groove;
+    border-radius: 5px;
 }
 .modal{
     background-color: rgba(0,0,0,.2);

@@ -4,18 +4,40 @@
     <title>Login Page</title>
     <link type="text/css" href="/css/style.css" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
 </head>
 <body>
 
-<p><%= message %></p>
+<h1>My Movie List</h1>
 
-<h1>Log In</h1>
+<p><font color="red"><%= message %></font></p>
+
+<h2>Log In</h2>
 
 <form action="/users/login" method="post">
-    Username: <input type="text" name="username" placeholder="username"><br>
-    Password: <input type="text" name="password" placeholder="password"><br>
+    <input type="text" name="username" placeholder="username"><br><br>
+    <input type="text" name="password" placeholder="password" id="next"><br><br>
     <button>Login</button>
 </form>
+
+<script language="JavaScript">
+
+    //keyCode 13 = enter
+    if(event.keyCode === 13){
+        alert("adasdas")
+        //when you press enter after the first input field
+        let next = document.getElementById('next').click(next)
+        // direct to the next input box
+
+        // when you press enter on the keyboard the button is clicked
+       document.getElementsByTagName('button').click()
+    }
+</script>
 
 </body>
 </html>
