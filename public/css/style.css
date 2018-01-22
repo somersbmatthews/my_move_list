@@ -3,7 +3,6 @@ body{
     text-align: center;
     /*font-family: 'Arvo', serif;*/
     letter-spacing: 0.1em;
-    background-image: url('/public/curtains.JPEG');
 }
 h1{
     margin: 10px auto;
@@ -18,17 +17,23 @@ h2{
     font-size: 30px;
 }
 button{
+    color: white;
+    background-color: #007AFF;
     border-radius: 5px;
     font-size: 15px;
     padding: 3px 25px 3px 25px;
+    width: 15vw;
+    align-self: center;
 }
 button:hover{
-    color: white;
     background-color: #007AFF;
+    opacity: .6;
+    color: white;
     border-radius: 5px;
 }
 input{
     padding: 7px;
+    margin-bottom: 10px;
     font-size: 20px;
     text-align: center;
     border-style: groove;
@@ -38,24 +43,24 @@ input{
     background-color: rgba(0,0,0,.2);
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     height: 50vh;
     width: 50vw;
-    z-index: 1;
+    z-index: 2;
     overflow: auto;
     display: none;
 }
 .modalContent{
-    background-color: white;
-    height: 40vh;
-    width: 40vw;
+    height: 30vh;
+    width: 30vw;
     margin: 60px auto;
 
 }
-.modalForm{
+.modalForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 25px;
+
 }
 

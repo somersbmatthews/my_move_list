@@ -22,5 +22,26 @@
     position: absolute;
     top: 8px;
     right: 16px;
+    font-size: 60px;
+}
+.middle{
+    position: absolute;
+    top: 8px;
+    bottom: 20px;
+    right: 16px;
+}
+h1{
+    font-family: 'Monoton', cursive;
+    font-weight: normal;
+}
+h2{
     font-size: 50px;
+}
+h3{
+    font-size: 20px;
+}
+h4{
+    font-size: 20px;
+    text-align: center;
+    width: 60vw;
 }
