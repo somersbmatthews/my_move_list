@@ -8,6 +8,8 @@
 #background {
     width: 80vw;
     height: 450px;
-    opacity: .6;
+    background: rgba(139, 0, 139, 0.6);
+    opacity: 0.6;
+
     position: relative;
 }

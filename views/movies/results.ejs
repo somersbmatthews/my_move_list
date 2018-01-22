@@ -1,28 +1,27 @@
-<%include ../partials/movieshead.ejs%>
+<% include ../partials/movieshead.ejs %>
 <link type="text/css" href="/css/searchPage.css" rel="stylesheet">
 
 <h1>Search Results</h1>
 
-
-<% for (let i = 0; i <=5; i++) { -%>
-
-	<% if(body.results[i].vote_average > minRating){ %>
-
-
-	<%=body.results[i].title%> (<%=body.results[i].release_date%>)<br>
+<% if(body.results.length != 0){ %>
+<% for (let i = 0; i <= 5; i++) { %>
+<% if(body.results[i].vote_average > minRating){ %>
 
 
-	User Score <%=body.results[i].vote_average%> <br>
+<h2><%= body.results[i].title %>(<%= body.results[i].release_date %>)</h2><br>
 
-	It was released on <br>
+User Score <%= body.results[i].vote_average %> <br>
 
-	Overview: <%=body.results[i].overview%> <br>
+Overview: <%= body.results[i].overview %> <br>
 
-	<img id="poster" src="https://image.tmdb.org/t/p/w300/<%=body.results[i].poster_path%>">
-	<img id="background" src="https://image.tmdb.org/t/p/w600/<%=body.results[i].backdrop_path%>">
+<img id="poster" src="https://image.tmdb.org/t/p/w300/<%= body.results[i].poster_path %>">
+<img id="background" src="https://image.tmdb.org/t/p/w600/<%= body.results[i].backdrop_path %>">
 
-	<br>
-	<% } %>
+<br>
 <% } %>
+<% } %>
+<% } else { %>
+<h2>No results matching your search</h2>
 
- <%include ../partials/moviesfooter.ejs%>
+<% } %>
+<% include ../partials/moviesfooter.ejs %>
