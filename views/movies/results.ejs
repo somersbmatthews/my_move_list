@@ -4,12 +4,17 @@
 
 
 <% for (let i = 0; i <=5; i++) { %>
+	<%	if(body.results[i].vote_average>minRating){ %>
+
 	Title for search result <%=i+1%> is "<%=body.results[i].title%>"<br>
-	Rating is <%=body.results[i].vote_average%> <br>
-	It was released on <%=body.results[i].release_date%> <br>
+			
+	
+		Rating is <%=body.results[i].vote_average%> <br>
+		It was released on <%=body.results[i].release_date%> <br>
 	<br>
 	<br>
-<% } -%>
+	<% }%>
+<% } %>
 
 
 
