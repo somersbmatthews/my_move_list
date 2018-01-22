@@ -1,27 +1,14 @@
 const express = require('express');
 const request = require('request');
-
 const router = express.Router();
-
-// importing movieFactory class
-const User = require('../API.js')
-
 const apiKey = "c6ba51285da546e27050e39e5bf072be";
 
-let searchNumber = 0;
-
-
-
-router.get('/results', (req,res) =>{
-	
-
-
-
-	const options = { method: 'GET',
+const options = { method: 'GET',
 	  url: 'https://api.themoviedb.org/3/discover/movie',
 	  qs: 
 	   { primary_release_year: '2017',
-	   	 with_genres: '18',
+	   	 with_genres: 18,
+	   	 "vote_average.gte": 7,
 	   	 page: '1',
 	     include_video: 'false',
 	     include_adult: 'false',
@@ -31,25 +18,27 @@ router.get('/results', (req,res) =>{
 	     body: '{}' 
 	 };
 
-	request(options, function (error, response, body) {
+
+router.get('/results', (req,res) =>{
+	console.log(options);
+	// res.send('check the console');
+	request(options, (error, response, body) => {
 	  if (error) throw new Error(error);
-		const bodyJSON = JSON.parse(body)
-		console.log(bodyJSON)
+			const bodyJSON = JSON.parse(body)
+			// console.log(bodyJSON)
 	  	res.render('movies/results.ejs', {
-			body: bodyJSON
+				body: bodyJSON
 	    });
-	    // console.log(body);
-	    // console.log(body.results)
-
-	 // res.send(body);
-
-//	  console.log(body);
 	});
-
-
-	
 })
 
+router.post('/results', (req, res) => {
+	// console.log(req.body.genre)
+	options.qs.with_genres = req.body.genre;
+	options.qs.primary_release_year = req.body.releaseYear;
+	options.qs["vote_average.gte"] = req.body.minRating;
+	res.redirect("/movies/results")
+})
 
 
 
