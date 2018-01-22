@@ -1,16 +1,38 @@
-<%include ../partials/movieshead.ejs%>
-<h1>Search results for globalresponse</h1>
+<!doctype html>
+<html>
+<head>
+    <title>Search Results</title>
+
+	<link type="text/css" href="/css/searchPage.css" rel="stylesheet">
+
+    <%include ../partials/movieshead.ejs%>
+    <%include ../partials/moviesfooter.ejs%>
+</head>
+<body>
+
+<h1>Search Results</h1>
 
 
 
 <% for (let i = 0; i <=5; i++) { -%>
-	Title for search result <%=i+1%> is "<%=body.results[i].title%>"<br>
-	Rating is <%=body.results[i].vote_average%> <br>
-	It was released on <%=body.results[i].release_date%> <br>
+	<%=body.results[i].title%> (<%=body.results[i].release_date%>)<br>
+
+	User Score <%=body.results[i].vote_average%> <br>
+
+	It was released on <br>
+
+	Overview: <%=body.results[i].overview%> <br>
+
+	<img id="poster" src="https://image.tmdb.org/t/p/w300/<%=body.results[i].poster_path%>">
+	<img id="background" src="https://image.tmdb.org/t/p/w600/<%=body.results[i].backdrop_path%>">
+
+
 	<br>
-	<br>
-<% } -%>
+<% } %>
 
 
 
-<%include ../partials/moviesfooter.ejs%>
+
+
+</body>
+</html>
