@@ -58,11 +58,11 @@ input, select{
     border-radius: 5px;
 }
 .modal{
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(0,0,0,.9);
     position: fixed;
     top: 0;
     right: 0;
-    height: 50vh;
+    height: 60vh;
     width: 40vw;
     z-index: 2;
     overflow: auto;
@@ -72,7 +72,6 @@ input, select{
     height: 30vh;
     width: 30vw;
     margin: 60px auto;
-
 }
 .modalForm {
     display: flex;
