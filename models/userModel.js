@@ -14,26 +14,20 @@ const userSchema = new mongoose.Schema({
 	moviesToSee: [{
 		movieId: String, // Database Id
 		title: String,
-		genre: [String], // Movies can qualify as multiple genres
 		img: String, // SRC url
-		overview: String, // Plot summary
-		trailer: String, //SRC url
 		rating: Number,
 		watched: {
 			type: Boolean,
 			default: false
 		},
-		userRating: Number,
-		userReview: String
+		userRating: Number, //Leaving blank for now
+		userReview: String // Leaving blank for now
 	}],
 	searchHistory: [String], //Will be the query sent to the API
 	seenMovies: [{
 		movieId: String, // Database Id
 		title: String,
-		genre: [String], // Movies can qualify as multiple genres
 		img: String, // SRC url
-		overview: String, // Plot summary
-		trailer: String, //SRC url
 		rating: Number,
 		watched: {
 			type: Boolean,
