@@ -49,7 +49,7 @@ button:hover{
     text-align: right;
     border-bottom: 1.5px solid black;
 }
-input{
+input, select{
     padding: 7px;
     margin-bottom: 10px;
     font-size: 20px;
