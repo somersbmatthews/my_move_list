@@ -31,26 +31,37 @@ router.route("/login")
 
 router.route("/register")
 	.get((req, res) => {
-		res.render("users/register.ejs")
+		res.render("users/register.ejs", {
+			message: ""
+		})
 	})
 
 	.post((req, res) => {
-		req.session.username = req.body.username;
-		req.session.logged = true;
-		req.session.message = "";
-		const password = req.body.password;
-		const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-		const userDBEntry = {
-			username: req.body.username,
-			password: passwordHash
-		}	
-		User.create(userDBEntry, (err, createdUser) => {
-			if (err) {
-				console.log(err);
-				res.send(err);
+		User.findOne({ username: req.body.username }, (err, foundUser) => {
+			if (foundUser) {
+				const message = "That username is already taken"
+				res.render("users/register.ejs", {
+					message: message
+				})
 			} else {
-				console.log(createdUser);
-				res.redirect("/users/preferences")
+				req.session.username = req.body.username;
+				req.session.logged = true;
+				req.session.message = "";
+				const password = req.body.password;
+				const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+				const userDBEntry = {
+					username: req.body.username,
+					password: passwordHash
+				}	
+				User.create(userDBEntry, (err, createdUser) => {
+					if (err) {
+						console.log(err);
+						res.send(err);
+					} else {
+						console.log(createdUser);
+						res.redirect("/users/preferences")
+					}
+				})
 			}
 		})
 	})
@@ -72,20 +83,24 @@ router.route("/preferences")
 		console.log(req.session)
 	})
 	.post((req, res) => {
-		User.findOneAndUpdate({ username: req.session.username},
-			{$set: {favGenres: req.body.favGenre, favActors: req.body.favActor} },
+		User.findOne({ username: req.session.username }, (err, foundUser) => {
+			if (foundUser) {
 
-			(err, updatedUser) => {
-				if (err) {
-					console.log(err)
-				} else {
-					res.send(updatedUser);
-				}
+				foundUser.favGenres.push(req.body.favActor)
+				foundUser.favActors.push(req.body.favGenre)
+
+
+				console.log(foundUser.favGenres)
+				console.log(foundUser.favActors)
+
+				foundUser.save((err, data) => {
+					res.redirect("/users/preferences")
+				})
+			} else {
+				console.log(err)
 			}
-		)
+		})
 	})
-
-
 
 
 module.exports = router;
