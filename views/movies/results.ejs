@@ -16,7 +16,9 @@
 
 
         <div class="container">
+            <a href="/movies/<%=body.results[i].id%>">
             <img id="background" src="https://image.tmdb.org/t/p/w600/<%= body.results[i].backdrop_path %>">
+            </a>
             <div class="top">
                 <h2><%= body.results[i].title %>(<%= year %>)</h2>
                 <h3>User Score <%= body.results[i].vote_average %></h3>

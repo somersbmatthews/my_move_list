@@ -1,7 +1,46 @@
 <%include ../partials/movieshead.ejs%>
 
+<link rel="stylesheet" href="/css/showPage.css">
 
-<h1><%=body.results.title%></h1>
+
+
+<% let date = body.release_date %>
+<% let year = date.slice(0,4) %>
+
+
+
+<div class="container">
+    <img id="poster" src="https://image.tmdb.org/t/p/w300/<%= body.poster_path %>">
+    <img id="background" src="https://image.tmdb.org/t/p/w600/<%= body.backdrop_path %>">
+    <div class="top">
+        <h2><%= body.title %>(<%= year %>)</h2>
+        <small>[ <%= body.tagline %> ]</small>
+
+
+        <h3>User Rating <i class="fa fa-star-o" aria-hidden="true"></i> <%= body.vote_average %></h3>
+        <h3>Overview</h3>
+        <h4><%= body.overview %></h4>
+        <h6><span class="showText">Favorite </span><i class="fa fa-heart" aria-hidden="true"></i></h6>
+        <h6 id="star"><span class="showText">Review </span><i class="fa fa-star" aria-hidden="true"></i></h6>
+    </div>
+</div>
+
+<h5>Genres:</h5>
+<% for(let i=0; i < body.genres.length; i++){ %>
+    <p><%= body.genres[i].name %></p>
+<% } %>
+
+<h5>Production Companies:</h5>
+<% for(let i=0; i < body.production_companies.length; i++){ %>
+   <p><%= body.production_companies[i].name %></p>
+<% } %>
+
+<h5>Production Countries:</h5>
+<% for(let i=0; i < body.production_countries.length; i++){ %>
+<p><%= body.production_countries[i].name %></p>
+<% } %>
+
+
 
 
 

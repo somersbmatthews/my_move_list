@@ -1,9 +1,13 @@
+body{
+
+}
+
 #poster{
     width: 300px;
     position: absolute;
     opacity: 1;
     left: 100px;
-    margin: -480px auto;
+    margin: 30px auto;
     z-index: 1;
 }
 #background {
@@ -13,6 +17,7 @@
     opacity: 0.6;
     position: relative;
 }
+
 .container {
     position: relative;
     text-align: center;
@@ -51,9 +56,32 @@ h4{
     text-align: center;
     width: 60vw;
 }
-p{
-    font-size: 30px;
+h5{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
 }
-select{
-    text-align: center;
+/*heart icon*/
+h6{
+    font-size: 30px;
+    margin: 50px;
+    /*text-align: right;*/
+    top: 10px;
+    display: inline;
+}
+.showText span{
+    visibility: hidden;
+}
+h6:hover, .showText span{
+    visibility: visible;
+    color: red;
+    font-size: 30px;
+    margin: 50px;
+    top: 10px;
+}
+#star:hover{
+    color:yellow;
+}
+p{
+    text-align: left;
 }
