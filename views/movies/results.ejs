@@ -24,7 +24,10 @@
                 <h4><%= body.results[i].overview %></h4>
 
             </div>
-            <img id="poster" src="https://image.tmdb.org/t/p/w300/<%= body.results[i].poster_path %>">
+
+            <a href="/movies/<%=body.results[i].id%>">
+                <img id="poster" src="https://image.tmdb.org/t/p/w300/<%= body.results[i].poster_path %>">
+            </a>
 
         </div>
         <% } %>

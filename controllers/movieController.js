@@ -139,6 +139,22 @@ router.post('/results', (req, res) => {
 })
 
 
+//route to single movie info
+router.get('/:id', (req,res) =>{
+    // let options = { method: 'GET',
+    //     url: 'https://api.themoviedb.org/3/movie/346364',
+    //     qs:
+    //         { language: 'en-US',
+    //             api_key: 'c6ba51285da546e27050e39e5bf072be' },
+    //     body: '{}' };
+    //
+    // request(options, function (error, response, body) {
+    //     if (error) throw new Error(error);
+
+	res.render('movies/show.ejs')
+});
+
+
 
 
 module.exports = router;
