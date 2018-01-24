@@ -8,8 +8,6 @@ let minRating = 0;
 
 router.get('/results', (req,res) => {
 	
-
-	// console.log(req.session.body)
 	res.render("movies/results.ejs", {
 		body: req.session.body,
 		minRating: minRating
@@ -111,16 +109,16 @@ const discoverOptions = { method: 'GET',
 	    body: '{}',      
 	 	};
 
-// const movieOptions = { method: 'GET',
-// 		url: 'https://api.themoviedb.org/3/search/movie',
-// 		qs: 
-// 		  {  include_adult: 'false',
-// 		     page: '',
-// 		     query: '',
-// 		     language: 'en-US',
-// 		     api_key: apiKey },
-// 		 	 body: '{}'
-// 	};
+const movieOptions = { method: 'GET',
+		url: 'https://api.themoviedb.org/3/search/movie',
+		qs: 
+		  {  include_adult: 'false',
+		     page: '',
+		     query: '',
+		     language: 'en-US',
+		     api_key: apiKey },
+		 	 body: '{}'
+	};
 
 
 
@@ -128,53 +126,51 @@ const discoverOptions = { method: 'GET',
 router.post("/results", (req, res) => {
 	
 	const setDiscoverObject = () => {
-		console.log(req.body)
 		discoverOptions.qs.primary_release_year = req.body.releaseYear;
-		// console.log(req.body.genre, " THIS IS THE SUBMITTED GENRE---------------")
 		discoverOptions.qs.with_genres = req.body.genre;
-		// console.log("req.body ---------- ", req.body)
-		// console.log("discoverOptions ---------- ", discoverOptions)
 		callDiscover();
 	}
 
 	const callDiscover = () => {
-		// console.log("This is the requested discvoerOptions ----------- ", discoverOptions)
 		request(discoverOptions, (error, response, body) => {
     	if (error) throw new Error(error);
 			const bodyJSON = JSON.parse(body)
 			req.session.body = bodyJSON
-			// res.send(req.session)
 			res.redirect("/movies/results")
   	});
 	}
 
-
-	// const setMovieObject = () => {
-	// 	movieOptions.qs.query = req.body.actor;
-
-	// 	callMovie();
-	// }
-
-	// const callMovie = () => {
-	// 	request(movieOptions, (error, response, body) => {
-	// 		if (error) throw new Error(error);
-	// 		const bodyJSON = JSON.parse(body)
-	// 		req.session.body = bodyJSON;
-
-	// 		res.send(bodyJSON)
-
-	// 	})
+	const setMovieObject = () => {
+		console.log(req.body)
+		movieOptions.qs.query = req.body.title	;
 		
-	// }
+
+		// res.send(movieOptions)
+
+		callMovie();
+	}
+
+	const callMovie = () => {
+		request(movieOptions, (error, response, body) => {
+			if (error) throw new Error(error);
+			const bodyJSON = JSON.parse(body)
+			req.session.body = bodyJSON;
+			res.redirect("/movies/results")
+
+		})
+		
+	}
 
 
 	// Calling Methods
 
-	// if (req.body.title) {
-	// 	setMovieObject();
-	// } else {
-		setDiscoverObject();		
-	// }
+	
+	if (req.body.title) {
+		setMovieObject();
+	} else {
+		setDiscoverObject();
+	}	
+	
 
 
 
