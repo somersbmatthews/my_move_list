@@ -1,9 +1,8 @@
 const express = require('express');
 const request = require('request');
 const router = express.Router();
+const User = require("../models/userModel.js");
 const apiKey = "c6ba51285da546e27050e39e5bf072be";
-
-
 
 const discoverOptions = { method: 'GET',
 	    url: 'https://api.themoviedb.org/3/discover/movie',
@@ -47,21 +46,68 @@ const movieOptions = { method: 'GET',
 
 
 router.get('/results', (req,res) => {
-	
-	res.render("movies/results.ejs", {
-		body: req.session.body,
+		res.render("movies/results.ejs", {
+		body: req.session.body
 	})
+
+
 });
 
+router.get('/browse', (req,res)=>{
 
-// results is an arr of all movies
-// req.session.body is entire obj
-router.get('/browse', (req,res) => {
-    res.render("movies/browse.ejs", {
-        mostPop: req.session.body.results,
-		genre: req.session.body.results,
-		actor: req.session.body.results
-    })
+
+
+	// User.findOne({ username: req.session.username }, (err, foundUser) => {
+	// 	if (foundUser) {
+	// 			//this code gets the two array preferences from the foundUser
+
+
+
+	// 				foundUser.favGenres.push(req.body.favActor)
+	// 				foundUser.favActors.push(req.body.favGenre)
+
+
+	// 				console.log(foundUser.favGenres)
+	// 				console.log(foundUser.favActors)
+
+	// 				foundUser.save((err, data) => {
+	// 					res.redirect("/users/preferences")
+	// 				})
+	// 			} else {
+	// 				console.log(err)
+	// 			}
+	// 	})
+
+
+		//mostPop
+		//genre
+		//actor
+
+		// for(let i = 0; i<req.userGenreArray; i++){
+		// 	req.session.userGenreArray[i]
+		// }
+		// for(let j = 0; j<req.userPersonArray; j++){
+		// 	req.session.userPersonArray[i]
+		// }
+
+		
+		request(discoverOptions, (error, response, body) => {
+    	if (error) throw new Error(error);
+			const discoverBodyJSON = JSON.parse(body)
+		//	console.log(discoverBodyJSON)
+		//compareAndFilter(movieBody, discoverBodyJSON)
+		req.session.body = discoverBodyJSON;
+  		});
+
+setTimeout(()=>{
+		res.render("movies/browse.ejs", {
+			mostPop: req.session.body.results,
+			genre: req.session.body.results,
+			actor: req.session.body.results
+		})
+
+    
+}, 2000)
 });
 
 
@@ -125,18 +171,18 @@ router.post("/results", (req, res) => {
 	const compareAndFilter = (movieBody, discoverBody) => {
 		
 		let otherSearch = ""
- 		if (discoverOptions.qs.primary_release_year || discoverOptions.qs.with_genres || discoverOptions.qs["vote_average.gte"]|| discoverOptions.qs.with_cast) {
-			otherSearch = true
-			// console.log(otherSearch)
-		} else {
-			otherSearch = false
-			// console.log(otherSearch)
-		}
+ 		if (discoverOptions.qs.primary_release_year || 
+ 				discoverOptions.qs.with_genres || 
+ 				discoverOptions.qs["vote_average.gte"]||
+ 				discoverOptions.qs.with_cast) {
+					otherSearch = true
+				} else {
+					otherSearch = false
+				}
 
 		const resultsObj = {
 			results: [],
 		}
-		console.log(otherSearch)
 		if (movieBody && otherSearch) {
 			for(let m = 0; m < movieBody.results.length; m++){
 				for(let d = 0; d < discoverBody.results.length; d++){
@@ -156,10 +202,10 @@ router.post("/results", (req, res) => {
 			req.session.body = movieBody
 			res.redirect("/movies/browse")
 		}
-	}
+	};
 
 setMovieObject();
-})
+});
 
 
 
@@ -172,29 +218,30 @@ router.get('/:id', (req,res) =>{
                 api_key: apiKey },
         body: '{}' };
 
-
-
-
     request(options, function (error, response, body) {
         if (error) {
             throw new Error(error)
-		}else{
-        	console.log(body)
-			// res.send(body)
-            res.render('movies/show.ejs',{
-        		body: JSON.parse(body)
-			})
-
-		}
+				}else{
+        	// Passing the info from what the user clicked on to their session so we can continue to track it
+        	req.session.body = JSON.parse(body)
+          res.render('movies/show.ejs',{
+      			body: req.session.body
+				})
+			}
     })
-	//render can take 2 arg
-	//route and obj with attributes we want to pass into page
 });
 
 
 //create post route for the fav movie append to watch list
 router.post('/:id', (req,res) =>{
-
+	// Push movie information to user moviesToWatch when button is pushed
+	User.findOne({ username: req.session.username }, (err, foundUser) => {
+		foundUser.moviesToSee.push(req.session.body)
+		foundUser.save((err, data) => {
+			
+			res.redirect("/movies/"+req.params.id)
+		})
+	})
 })
 
 

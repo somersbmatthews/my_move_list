@@ -9,13 +9,13 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		require: true
 	},
-	favGenres: [String],
+	favGenres: [Number],
 	favActors: [String],
 	moviesToSee: [{
-		movieId: String, // Database Id
+		id: String, // Database Id
 		title: String,
-		img: String, // SRC url
-		rating: Number,
+		poster_path: String, // SRC url
+		vote_average: Number,
 		watched: {
 			type: Boolean,
 			default: false
@@ -25,10 +25,10 @@ const userSchema = new mongoose.Schema({
 	}],
 	searchHistory: [String], //Will be the query sent to the API
 	seenMovies: [{
-		movieId: String, // Database Id
+		id: String, // Database Id
 		title: String,
-		img: String, // SRC url
-		rating: Number,
+		poster_path: String, // SRC url
+		vote_average: Number,
 		watched: {
 			type: Boolean,
 			default: true
