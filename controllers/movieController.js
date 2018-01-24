@@ -1,6 +1,7 @@
 const express = require('express');
 const request = require('request');
 const router = express.Router();
+const User = require("../models/userModel.js");
 const apiKey = "c6ba51285da546e27050e39e5bf072be";
 
 
@@ -114,18 +115,18 @@ router.post("/results", (req, res) => {
 	const compareAndFilter = (movieBody, discoverBody) => {
 		
 		let otherSearch = ""
- 		if (discoverOptions.qs.primary_release_year || discoverOptions.qs.with_genres || discoverOptions.qs["vote_average.gte"]|| discoverOptions.qs.with_cast) {
-			otherSearch = true
-			// console.log(otherSearch)
-		} else {
-			otherSearch = false
-			// console.log(otherSearch)
-		}
+ 		if (discoverOptions.qs.primary_release_year || 
+ 				discoverOptions.qs.with_genres || 
+ 				discoverOptions.qs["vote_average.gte"]||
+ 				discoverOptions.qs.with_cast) {
+					otherSearch = true
+				} else {
+					otherSearch = false
+				}
 
 		const resultsObj = {
 			results: [],
 		}
-		console.log(otherSearch)
 		if (movieBody && otherSearch) {
 			for(let m = 0; m < movieBody.results.length; m++){
 				for(let d = 0; d < discoverBody.results.length; d++){
@@ -160,29 +161,31 @@ router.get('/:id', (req,res) =>{
                 api_key: apiKey },
         body: '{}' };
 
-
-
-
     request(options, function (error, response, body) {
         if (error) {
             throw new Error(error)
-		}else{
-        	console.log(body)
-			// res.send(body)
-            res.render('movies/show.ejs',{
-        		body: JSON.parse(body)
-			})
-
-		}
+				}else{
+        	// Passing the info from what the user clicked on to their session so we can continue to track it
+        	req.session.body = JSON.parse(body)
+          res.render('movies/show.ejs',{
+      			body: req.session.body
+				})
+			}
     })
-	//render can take 2 arg
-	//route and obj with attributes we want to pass into page
 });
 
 
 //create post route for the fav movie append to watch list
 router.post('/:id', (req,res) =>{
-
+	// Push movie information to user moviesToWatch when button is pushed
+	User.findOne({ username: req.session.username }, (err, foundUser) => {
+		foundUser.moviesToSee.push(req.session.body)
+		foundUser.save((err, data) => {
+			
+			res.redirect("/movies/"+req.params.id)
+		})
+	})
 })
+
 
 module.exports = router;

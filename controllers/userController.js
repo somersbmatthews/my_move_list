@@ -68,7 +68,9 @@ router.route("/register")
 
 router.route("/watchlist")
 	.get((req, res) => {
-		res.render("users/watch-list.ejs")
+		res.render("users/watch-list.ejs", {
+			
+		})
 	})
 
 
