@@ -151,5 +151,38 @@ setMovieObject();
 })
 
 
+//route to single movie info
+router.get('/:id', (req,res) =>{
+    let options = { method: 'GET',
+        url: 'https://api.themoviedb.org/3/movie/' + req.params.id,
+        qs:
+            { language: 'en-US',
+                api_key: apiKey },
+        body: '{}' };
+
+
+
+
+    request(options, function (error, response, body) {
+        if (error) {
+            throw new Error(error)
+		}else{
+        	console.log(body)
+			// res.send(body)
+            res.render('movies/show.ejs',{
+        		body: JSON.parse(body)
+			})
+
+		}
+    })
+	//render can take 2 arg
+	//route and obj with attributes we want to pass into page
+});
+
+
+//create post route for the fav movie append to watch list
+router.post('/:id', (req,res) =>{
+
+})
 
 module.exports = router;

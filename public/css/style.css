@@ -49,6 +49,11 @@ button:hover{
     text-align: right;
     border-bottom: 1.5px solid black;
 }
+button i{
+    font-size: 20px;
+    color: white;
+    margin-left: 50px;
+}
 input, select{
     padding: 7px;
     margin-bottom: 10px;
