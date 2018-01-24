@@ -18,16 +18,16 @@ $(searchIcon).on('click', openModal);
 
 $submitSearch.on('click', closeModal);
 
-// anywhere clicked
-$('body').on('click', function(event) {
-    // thats not the modal or search button
-    if (event.target === modal || event.target === searchIcon) {
-        // do noting
+// // anywhere clicked
+// $('body').on('click', function(event) {
+//     // thats not the modal or search button
+//     if (event.target === modal || event.target === searchIcon) {
+//         // do noting
 
-    }else{
-        closeModal();
-    }
-});
+//     }else{
+//         closeModal();
+//     }
+// });
 
 
 
