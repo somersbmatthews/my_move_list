@@ -40,19 +40,28 @@ h1{
     font-weight: normal;
 }
 h2{
-    font-size: 50px;
-    /*font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));*/
+    /*font-size: 50px;*/
+    font-size: calc(30px + (76 - 30) * ((100vw - 300px) / (1600 - 300)));
+    text-align: center;
+    z-index: 2;
+    margin-top: -5px;
 }
 h3{
-    font-size: 20px;
+    /*font-size: 20px;*/
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+    text-align: center;
+    z-index: 2;
 }
 h4{
-    font-size: 20px;
+    /*font-size: 20px;*/
+    font-size: calc(14px + (26 - 14) * ((100vw - 50px) / (1600 - 50)));
     text-align: center;
     width: 60vw;
 }
 p{
-    font-size: 30px;
+    /*font-size: 30px;*/
+    font-size: calc(10px + (26 - 10) * ((100vw - 300px) / (1600 - 300)));
+    text-align: center;
 }
 select{
     text-align: center;

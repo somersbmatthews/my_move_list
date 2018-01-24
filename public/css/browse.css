@@ -1,0 +1,22 @@
+body{
+    /*display: flex;*/
+}
+h1{
+    font-size: 40px;
+    text-align: center;
+    font-family: 'Monoton', cursive;
+    font-weight: normal;
+}
+h2{
+    font-size: 10pt;
+}
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+.flexslider{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90vw;
+}

@@ -36,6 +36,14 @@ $('body').on('click', function (event) {
 
 });
 
+$(window).load(() =>{
+    $('.flexslider').flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 300,
+        itemMargin: 5
+    })
+});
 
 
 

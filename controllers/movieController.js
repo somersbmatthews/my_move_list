@@ -51,7 +51,18 @@ router.get('/results', (req,res) => {
 	res.render("movies/results.ejs", {
 		body: req.session.body,
 	})
-})
+});
+
+
+// results is an arr of all movies
+// req.session.body is entire obj
+router.get('/browse', (req,res) => {
+    res.render("movies/browse.ejs", {
+        mostPop: req.session.body.results,
+		genre: req.session.body.results,
+		actor: req.session.body.results
+    })
+});
 
 
 router.post("/results", (req, res) => {
@@ -137,18 +148,19 @@ router.post("/results", (req, res) => {
 				}
 			}
 			req.session.body = resultsObj;
-			res.redirect("/movies/results")
+			res.redirect("/movies/browse")
 		} else if (!movieBody) {
 			req.session.body = discoverBody
-			res.redirect("/movies/results")
+			res.redirect("/movies/browse")
 		} else if (movieBody && !otherSearch) {
 			req.session.body = movieBody
-			res.redirect("/movies/results")
+			res.redirect("/movies/browse")
 		}
 	}
 
 setMovieObject();
 })
+
 
 
 //route to single movie info
@@ -184,5 +196,6 @@ router.get('/:id', (req,res) =>{
 router.post('/:id', (req,res) =>{
 
 })
+
 
 module.exports = router;
