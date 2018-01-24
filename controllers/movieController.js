@@ -2,7 +2,6 @@ const express = require('express');
 const request = require('request');
 const router = express.Router();
 const apiKey = "c6ba51285da546e27050e39e5bf072be";
-let firstSearch = true;
 
 
 
@@ -55,28 +54,21 @@ router.get('/results', (req,res) => {
 })
 
 
-
-
-
-
 router.post("/results", (req, res) => {
 	
-	const setDiscoverObject = () => {
+	const setDiscoverObject = (movieBody) => {
 		discoverOptions.qs.with_cast = req.body.actor
 		discoverOptions.qs.primary_release_year = req.body.releaseYear;
 		discoverOptions.qs.with_genres = req.body.genre;
 		discoverOptions.qs["vote_average.gte"] = req.body.minRating
-		
-
-		callDiscover();
+		callDiscover(movieBody);
 	}
 
-	const callDiscover = () => {
+	const callDiscover = (movieBody) => {
 		request(discoverOptions, (error, response, body) => {
     	if (error) throw new Error(error);
-			const bodyJSON = JSON.parse(body)
-			req.session.body = bodyJSON
-			res.redirect("/movies/results")
+			const discoverBodyJSON = JSON.parse(body)
+			compareAndFilter(movieBody, discoverBodyJSON)
   	});
 	}
 
@@ -86,86 +78,77 @@ router.post("/results", (req, res) => {
 	}
 
 	const callMovie = () => {
-		request(movieOptions, (error, response, body) => {
-			if (error) throw new Error(error);
-			const bodyJSON = JSON.parse(body)
-			req.session.body = bodyJSON;
-			res.redirect("/movies/results")
-		})
+		if (req.body.title) {
+			request(movieOptions, (error, response, body) => {
+				if (error) throw new Error(error);
+				const movieBodyJSON = JSON.parse(body)
+
+				setPeopleObject(movieBodyJSON)
+			})
+		} else {
+			const movieBodyJSON = false
+			setPeopleObject(movieBodyJSON)
+		} 		
 	}
 
-	const setPeopleObject = () => {
+	const setPeopleObject = (movieBody) => {
 		peopleOptions.qs.query = req.body.actor
-		getPersonId();
+		getPersonId(movieBody);
 	}
 
-	const getPersonId = () => {
-		request(peopleOptions, (err, res, body) => {
-			if (err) throw new Error(err);
-			const bodyJSON = JSON.parse(body);
-			const personId = bodyJSON.results["0"].id;
-			req.body.actor = personId;
-
-			setDiscoverObject();
-		})
+	const getPersonId = (movieBody) => {
+		if (req.body.actor) {
+			request(peopleOptions, (err, res, body) => {
+				if (err) throw new Error(err);
+				const bodyJSON = JSON.parse(body);
+				const personId = bodyJSON.results["0"].id;
+				req.body.actor = personId;
+				setDiscoverObject(movieBody);	
+			})
+		}	else {
+			setDiscoverObject(movieBody);
+		}
 	}
 
-	const compareAndFilter = () => {
-
-	}
-
-	// Calling Methods
-
-	if (req.body.title && req.body.actor) {
-
-	}
-	else if (req.body.title) {
-		setMovieObject();
-	} else if (req.body.actor) {
-		setPeopleObject();
-	} else {
-		setDiscoverObject();
-	}	
 	
+	const compareAndFilter = (movieBody, discoverBody) => {
+		
+		let otherSearch = ""
+ 		if (discoverOptions.qs.primary_release_year || discoverOptions.qs.with_genres || discoverOptions.qs["vote_average.gte"]|| discoverOptions.qs.with_cast) {
+			otherSearch = true
+			// console.log(otherSearch)
+		} else {
+			otherSearch = false
+			// console.log(otherSearch)
+		}
 
+		const resultsObj = {
+			results: [],
+		}
+		console.log(otherSearch)
+		if (movieBody && otherSearch) {
+			for(let m = 0; m < movieBody.results.length; m++){
+				for(let d = 0; d < discoverBody.results.length; d++){
+					if (movieBody.results[m].id === discoverBody.results[d].id) {
+						resultsObj.results.push(movieBody.results[m])
+					} else {
+						// Do Nothing
+					}
+				}
+			}
+			req.session.body = resultsObj;
+			res.redirect("/movies/results")
+		} else if (!movieBody) {
+			req.session.body = discoverBody
+			res.redirect("/movies/results")
+		} else if (movieBody && !otherSearch) {
+			req.session.body = movieBody
+			res.redirect("/movies/results")
+		}
+	}
 
-
-
-
-
+setMovieObject();
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
