@@ -3,7 +3,7 @@ const request = require('request');
 const router = express.Router();
 const apiKey = "c6ba51285da546e27050e39e5bf072be";
 let firstSearch = true;
-let minRating = 0;
+
 
 
 const discoverOptions = { method: 'GET',
@@ -11,6 +11,7 @@ const discoverOptions = { method: 'GET',
 	    qs: 
 		   { primary_release_year: "",
 		   	 with_genres: "",
+		   	 'vote_average.gte': '',
 		   	 with_cast: "",
 		   	 page: '',
 		     include_video: 'false',
@@ -50,7 +51,6 @@ router.get('/results', (req,res) => {
 	
 	res.render("movies/results.ejs", {
 		body: req.session.body,
-		minRating: minRating
 	})
 })
 
@@ -65,6 +65,9 @@ router.post("/results", (req, res) => {
 		discoverOptions.qs.with_cast = req.body.actor
 		discoverOptions.qs.primary_release_year = req.body.releaseYear;
 		discoverOptions.qs.with_genres = req.body.genre;
+		discoverOptions.qs["vote_average.gte"] = req.body.minRating
+		
+
 		callDiscover();
 	}
 
@@ -78,8 +81,7 @@ router.post("/results", (req, res) => {
 	}
 
 	const setMovieObject = () => {
-		console.log(req.body)
-		movieOptions.qs.query = req.body.title	;
+		movieOptions.qs.query = req.body.title;
 		callMovie();
 	}
 
@@ -108,11 +110,16 @@ router.post("/results", (req, res) => {
 		})
 	}
 
+	const compareAndFilter = () => {
+
+	}
 
 	// Calling Methods
 
-	
-	if (req.body.title) {
+	if (req.body.title && req.body.actor) {
+
+	}
+	else if (req.body.title) {
 		setMovieObject();
 	} else if (req.body.actor) {
 		setPeopleObject();
