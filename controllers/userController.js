@@ -79,7 +79,123 @@ router.route("/logout")
 
 router.route("/preferences")
 	.get((req, res) => {
-		res.render("users/preferences.ejs")
+
+	            	// <input type="checkbox" value="28" checked>Action</input>
+	            	// <input type="checkbox" value="12">Adventure</input>
+	            	// <input type="checkbox" value="16">Animation</input>
+	            	// <input type="checkbox" value="35">Comedy</input>
+	            	// <input type="checkbox" value="80">Crime</input>
+	            	// <input type="checkbox" value="99">Documentary</input>
+	            	// <input type="checkbox" value="18">Drama</input>
+	            	// <input type="checkbox" value="10751">Family</input>
+	            	// <input type="checkbox" value="14">Fantasy</input>
+	            	// <input type="checkbox" value="36">History</input>
+	            	// <input type="checkbox" value="27">Horror</input>
+	            	// <input type="checkbox" value="10402">Music</input>
+	            	// <input type="checkbox" value="9648">Mystery</input>
+	            	// <input type="checkbox" value="10749">Romance</input>
+	            	// <input type="checkbox" value="878">Science Fiction</input>
+	            	// <input type="checkbox" value="10770">TV Movie</input>
+	            	// <input type="checkbox" value="53">Thriller</input>
+	            	// <input type="checkbox" value="10752">War</input>
+	            	// <input type="checkbox" value="37">Western</input>
+	           
+		const genreObject = [
+			{
+				text: "Action",
+				id: "28"
+			},
+			{
+				text: "Adventure",
+				id: "12"
+			},
+						{
+				text: "Animation",
+				id: "16"
+			},
+						{
+				text: "Comedy",
+				id: "25"
+			},
+						{
+				text: "Crime",
+				id: "80"
+			},
+						{
+				text: "Documentary",
+				id: "99"
+			},
+						{
+				text: "Drama",
+				id: "18"
+			},
+						{
+				text: "Family",
+				id: "10751"
+			},
+			{
+				text: "Fantasy",
+				id: "14"
+			},
+		    {
+				text: "History",
+				id: "36"
+			},
+			{
+				text: "Horror",
+				id: "27"
+			},
+			{
+				text: "Music",
+				id: "10402"
+			},
+			{
+				text:"Mystery",
+				id: "9648"
+			},
+			{
+				text: "Romance",
+				id: "10749"
+			},
+			{
+				text: "Science Fiction",
+				id: "878"
+			},
+			{
+				text: "TV Movie",
+				id: "10770"
+			},
+			{
+				text: "Thriller",
+				id: "53"
+			},
+			{
+				text: "War",
+				id: "10752"
+			},
+			{
+				text: "Western",
+				id: "37"
+			}
+		]
+		User.findOne({ username: req.session.username }, (err, foundUser) => {
+			if (foundUser) {
+
+				console.log(foundUser.favGenres)
+				console.log(foundUser.favActors)
+
+			res.render("users/preferences.ejs", {
+			genre: foundUser.favGenres,
+			actor: foundUser.favActors
+
+			})
+
+			} else {
+				console.log(err)
+			}
+		})
+
+
 		console.log(req.session)
 	})
 	.post((req, res) => {
@@ -94,13 +210,55 @@ router.route("/preferences")
 				console.log(foundUser.favActors)
 
 				foundUser.save((err, data) => {
-					res.redirect("/users/preferences")
+				res.redirect("/users/preferences")
 				})
 			} else {
 				console.log(err)
 			}
 		})
 	})
+	// .put((req, res)=> { 
+	// 	// User.findOneAndUpdate({ username: req.session.username }, (err, foundUser) => {
+	// 	// 	if (foundUser) {
+	// 	// 		{
+	// 	// 			favGenres: [],
+	// 	// 			favActors: []
+
+	// 	// 		}
+
+
+	// 	// 	res.render("users/preferences.ejs", 
+	// 	// 	genre: foundUser.favGenres,
+	// 	// 	actor: foundUser.favActors
+	// 	// 	)
+	// 	// 			console.log("user genres after emptying", foundUser.favGenres)
+	// 	// 			console.log("user actors after emptying", foundUser.favActors)
+
+	// 	// 	} else {
+	// 	// 		console.log(err)
+	// 	// 	}
+	// 	})
+	// 			User.findOne({ username: req.session.username }, (err, foundUser) => {
+	// 				if (foundUser) {
+	// 				foundUser.favGenres = favGenreArray
+	// 				foundUser.favActors = []
+
+	// 				foundUser.favGenres.push(req.body.favActor)
+	// 				foundUser.favActors.push(req.body.favGenre)
+
+
+	// 				console.log("user genres after updating", foundUser.favGenres)
+	// 				console.log("user actors after updating", foundUser.favActors)
+
+	// 				foundUser.save((err, data) => {
+	// 					res.redirect("/users/preferences")
+	// 			    })
+	// 					} else {
+	// 						console.log(err)
+	// 					}
+	// 			})
+
+	// })
 
 
 module.exports = router;

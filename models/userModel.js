@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		require: true
 	},
-	favGenres: [String],
+	favGenres: [Number],
 	favActors: [String],
 	moviesToSee: [{
 		movieId: String, // Database Id

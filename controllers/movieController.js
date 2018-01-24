@@ -3,7 +3,7 @@ const request = require('request');
 const router = express.Router();
 const apiKey = "c6ba51285da546e27050e39e5bf072be";
 
-
+const User = require("../models/userModel.js");
 
 const discoverOptions = { method: 'GET',
 	    url: 'https://api.themoviedb.org/3/discover/movie',
@@ -47,10 +47,67 @@ const movieOptions = { method: 'GET',
 
 
 router.get('/results', (req,res) => {
-	
-	res.render("movies/results.ejs", {
-		body: req.session.body,
+		res.render("movies/results.ejs", {
+		body: req.session.body
 	})
+
+})
+
+router.get('/browse', (req,res)=>{
+
+
+
+	// User.findOne({ username: req.session.username }, (err, foundUser) => {
+	// 	if (foundUser) {
+	// 			//this code gets the two array preferences from the foundUser
+
+
+
+	// 				foundUser.favGenres.push(req.body.favActor)
+	// 				foundUser.favActors.push(req.body.favGenre)
+
+
+	// 				console.log(foundUser.favGenres)
+	// 				console.log(foundUser.favActors)
+
+	// 				foundUser.save((err, data) => {
+	// 					res.redirect("/users/preferences")
+	// 				})
+	// 			} else {
+	// 				console.log(err)
+	// 			}
+	// 	})
+
+
+		//mostPop
+		//genre
+		//actor
+
+		// for(let i = 0; i<req.userGenreArray; i++){
+		// 	req.session.userGenreArray[i]
+		// }
+		// for(let j = 0; j<req.userPersonArray; j++){
+		// 	req.session.userPersonArray[i]
+		// }
+
+		
+		request(discoverOptions, (error, response, body) => {
+    	if (error) throw new Error(error);
+			const discoverBodyJSON = JSON.parse(body)
+		//	console.log(discoverBodyJSON)
+		//compareAndFilter(movieBody, discoverBodyJSON)
+		req.session.body = discoverBodyJSON;
+  		});
+
+setTimeout(()=>{
+		res.render("movies/browse.ejs", {
+			mostPop: req.session.body.results,
+			genre: req.session.body.results,
+			actor: req.session.body.results
+		})
+
+    
+}, 2000)
 })
 
 
@@ -184,5 +241,6 @@ router.get('/:id', (req,res) =>{
 router.post('/:id', (req,res) =>{
 
 })
+
 
 module.exports = router;
