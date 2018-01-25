@@ -19,10 +19,9 @@
 <h1>Browse Movies</h1>
 
 
-<div class="flexslider">
+<div class="container">
 	<ul>
         <% for (let i = 0; i < mostPop.length; i++) { %>
-
 
         <% let date = mostPop[i].release_date %>
         <% let year = date.slice(0, 4) %>
@@ -37,5 +36,7 @@
 <% } %>
 </ul>
 </div>
+
+
 
 <%include ../partials/moviesfooter.ejs%>

@@ -100,11 +100,27 @@ router.route("/logout")
 		res.redirect("/users/login")
 	})
 
+router.route("/preferences/:index")
+	.delete((req, res) => {
+		User.findOne({ username: req.session.username }, (err, foundUser) => {
+			if (err) {
+				console.log(err)
+			} else {
+				foundUser.favActors.splice(req.params.index, 1);
+				// res.send(foundUser.favActors)
+				foundUser.save((err, data) => {
+					if (err) {
+						console.log(err)
+					} else {
+						res.redirect("/users/preferences")
+					}
+				})
+			}
+		})
+	})
+
 router.route("/preferences")
 	.get((req, res) => {
-	//	const EJSerror  = ejsLint('/users/preferences.ejs');
-		//const parsedEJSerror = JSON.parse(EJSerror);
-	//	console.log("this is ejsError", EJSerror);
 	           
 		const genreObject = [
 			{
@@ -189,10 +205,9 @@ router.route("/preferences")
 		User.findOne({ username: req.session.username }, (err, foundUser) => {
 			if (foundUser) {
 
-				// console.log("the user preferences database retrieval is working")
 
 				 console.log("this is found user fav genres object", foundUser.favGenres)
-	//			console.log('this is genre object', genreObject)
+
 
 				res.render("users/preferences.ejs", {
 					genre: foundUser.favGenres,
@@ -205,9 +220,6 @@ router.route("/preferences")
 				console.log(err)
 			}
 		})
-
-
-		//console.log(req.session)
 	} else {
 		res.redirect('/users/login')
 	}
@@ -215,27 +227,27 @@ router.route("/preferences")
 })
 
 	.post((req, res) => {
-		User.findOne({ username: req.session.username }, (err, foundUser) => {
-			if (foundUser) {
-				if(foundUser.favGener.length != 0){
-					for(let i = 0; i<foundUser.favActors.length; i++){
-						foundUser.favActors.pop()
+
+		User.findOneAndUpdate({ username: req.session.username },
+			{$set: { favGenres: req.body.favGenres }}, (err, updatedUser) => {
+				if (err) {
+					console.log(err);
+				} else {
+					if (req.body.favActor) {
+						updatedUser.favActors.push(req.body.favActor)
+						updatedUser.save((err, data) => {
+						if (err) {
+							console.log(err)
+						} else {
+							res.redirect("/users/preferences")
+						}
+						})	
+					} else {
+						res.redirect("/users/preferences")
 					}
-				}
-				for(let i = 0; i < req.body.favGenres.length; i++){
-					foundUser.favGenres.push(req.body.favGenres[i])
-				}
 
-				foundUser.favActors.push(req.body.favActor)
-
-				foundUser.save((err, data) => {
-					// res.send(data);
-					res.redirect("/users/preferences")
-				})
-			} else {
-				console.log(err)
-			}
-		})
+				}
+			})
 	})
 
 

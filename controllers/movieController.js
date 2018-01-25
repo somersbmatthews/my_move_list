@@ -266,7 +266,6 @@ router.delete("/:id", (req, res) => {
 		if (err) {
 			console.log(err)
 		} else {
-			const OgWatchList = foundUser.moviesToSee
 			foundUser.moviesToSee.splice(index, 1);
 
 			foundUser.save((err, data) => {
