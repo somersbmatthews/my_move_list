@@ -20,50 +20,35 @@
 
   Favorie Genres: 
 
-  	<%if (genre.length === 0){%>
-  	<form class="prefForm" action="/users/preferences" method="POST">
+  <form class="prefForm" action="/users/preferences" method="POST">
+  	<div name="genre">
+		<% for(let i = 0; i<arrayOfObjects.length; i++){ %>  
+			<input type="checkbox" value=<%=arrayOfObjects[i].id%> name="favGenres"
+				<% for (let j = 0; j < genre.length; j++) { -%>
+					<% if (arrayOfObjects[i].id == genre[j]) { -%>
+						checked
+					<% } -%>
+				<% } -%>
 
- 				<div name="genre">
-	                <% for(let i; i<genre.length; i++){ %>      	
-	            		<%<input type="checkbox" value="28">Action</input>%>
-	            	<%}%>
-
-
-	  <%}%>
-	          <%if (genre.length =! 0){%>
-
-  	<form class="prefForm" action="/users/preferences" method="POST">
-	         
- 				<div name="genre">
-
-	            	<% for(let i; i<genre.length; i++){ %>            	
-	            		<input type="checkbox" value="28">Action</input>
-	             	<%}%>
+			><%=arrayOfObjects[i].text%></input>
+		<%}%>
 	            
-	            </div>
-
-	          <%}%>
+    </div>
 
 
-	          <% let placeholder "Favorite Actor/Actress" %>
-	          <%if (actor.length =! 0){%>
-
-	          <%placeholder = actor[0]%>
-
-	          <%}%>
-
-<%if(actor.length != 0){%>
-	<%for(let i = 0; i<actor.length; i++){%>
-	<%=actor[i]%>
-
-	<%}%>
-
-<%}%>
-  Favorite Actor/Actress: <input placeholder="<%=placeholder%>" name="favActor" type="text">
-  <button id="submitPref">Submit</button>	
-</form>
+  	Favorite Actor/Actress: <input placeholder="Actor name" name="favActor" type="text">
+  		<ul>
+  		<% for (let i = 0; i < actor.length; i++) { -%>
+  			<li><%= actor[i] %></li>
+  		<% } -%>
+  		</ul>
+	<button id="submitPref">Submit</button>	
+  </form>
 
 
 
 
-<%include ../partials/moviesfooter.ejs%>
+
+
+
+<% include ../partials/moviesfooter.ejs %>
