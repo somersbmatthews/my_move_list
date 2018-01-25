@@ -68,8 +68,15 @@ router.route("/register")
 
 router.route("/watchlist")
 	.get((req, res) => {
-		res.render("users/watch-list.ejs", {
-			
+		User.findOne({ username: req.session.username}, (err, foundUser) => {
+			if (err) {
+				console.log(err)
+			} else {
+				// res.send(foundUser.moviesToSee);
+				res.render("users/watch-list.ejs", {
+					results: foundUser.moviesToSee
+				})
+			}
 		})
 	})
 
