@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel.js");
 const bcrypt = require("bcrypt")
-const ejsLint = require('ejs-lint');
+
+
 
 const getData = () => {
 	let defered = Promise.defer();
@@ -99,11 +100,27 @@ router.route("/logout")
 		res.redirect("/users/login")
 	})
 
+router.route("/preferences/:index")
+	.delete((req, res) => {
+		User.findOne({ username: req.session.username }, (err, foundUser) => {
+			if (err) {
+				console.log(err)
+			} else {
+				foundUser.favActors.splice(req.params.index, 1);
+				// res.send(foundUser.favActors)
+				foundUser.save((err, data) => {
+					if (err) {
+						console.log(err)
+					} else {
+						res.redirect("/users/preferences")
+					}
+				})
+			}
+		})
+	})
+
 router.route("/preferences")
 	.get((req, res) => {
-	//	const EJSerror  = ejsLint('/users/preferences.ejs');
-		//const parsedEJSerror = JSON.parse(EJSerror);
-	//	console.log("this is ejsError", EJSerror);
 	           
 		const genreObject = [
 			{
@@ -188,10 +205,9 @@ router.route("/preferences")
 		User.findOne({ username: req.session.username }, (err, foundUser) => {
 			if (foundUser) {
 
-				// console.log("the user preferences database retrieval is working")
 
 				 console.log("this is found user fav genres object", foundUser.favGenres)
-	//			console.log('this is genre object', genreObject)
+
 
 				res.render("users/preferences.ejs", {
 					genre: foundUser.favGenres,
@@ -204,9 +220,6 @@ router.route("/preferences")
 				console.log(err)
 			}
 		})
-
-
-		//console.log(req.session)
 	} else {
 		res.redirect('/users/login')
 	}
@@ -214,66 +227,29 @@ router.route("/preferences")
 })
 
 	.post((req, res) => {
-		User.findOne({ username: req.session.username }, (err, foundUser) => {
-			if (foundUser) {
 
-				for(let i = 0; i < req.body.favGenres.length; i++){
-					foundUser.favGenres.push(req.body.favGenres[i])
+		User.findOneAndUpdate({ username: req.session.username },
+			{$set: { favGenres: req.body.favGenres }}, (err, updatedUser) => {
+				if (err) {
+					console.log(err);
+				} else {
+					if (req.body.favActor) {
+						updatedUser.favActors.push(req.body.favActor)
+						updatedUser.save((err, data) => {
+						if (err) {
+							console.log(err)
+						} else {
+							res.redirect("/users/preferences")
+						}
+						})	
+					} else {
+						res.redirect("/users/preferences")
+					}
+
 				}
-
-				foundUser.favActors.push(req.body.favActor)
-
-				foundUser.save((err, data) => {
-					// res.send(data);
-					res.redirect("/users/preferences")
-				})
-			} else {
-				console.log(err)
-			}
-		})
+			})
 	})
-	// .put((req, res)=> { 
-	// 	// User.findOneAndUpdate({ username: req.session.username }, (err, foundUser) => {
-	// 	// 	if (foundUser) {
-	// 	// 		{
-	// 	// 			favGenres: [],
-	// 	// 			favActors: []
 
-	// 	// 		}
-
-
-	// 	// 	res.render("users/preferences.ejs", 
-	// 	// 	genre: foundUser.favGenres,
-	// 	// 	actor: foundUser.favActors
-	// 	// 	)
-	// 	// 			console.log("user genres after emptying", foundUser.favGenres)
-	// 	// 			console.log("user actors after emptying", foundUser.favActors)
-
-	// 	// 	} else {
-	// 	// 		console.log(err)
-	// 	// 	}
-	// 	})
-	// 			User.findOne({ username: req.session.username }, (err, foundUser) => {
-	// 				if (foundUser) {
-	// 				foundUser.favGenres = favGenreArray
-	// 				foundUser.favActors = []
-
-	// 				foundUser.favGenres.push(req.body.favActor)
-	// 				foundUser.favActors.push(req.body.favGenre)
-
-
-	// 				console.log("user genres after updating", foundUser.favGenres)
-	// 				console.log("user actors after updating", foundUser.favActors)
-
-	// 				foundUser.save((err, data) => {
-	// 					res.redirect("/users/preferences")
-	// 			    })
-	// 					} else {
-	// 						console.log(err)
-	// 					}
-	// 			})
-
-	// })
 
 
 module.exports = router;

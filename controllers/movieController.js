@@ -56,58 +56,66 @@ router.get('/results', (req,res) => {
 router.get('/browse', (req,res)=>{
 
 
+	// this mongoose method 
+	User.findOne({ username: req.session.username }, (err, foundUser) => {
+		if (foundUser) {
+		
+			const favActorArray = foundUser.favActors
+			const favGenresArray = foundUser.favGenres
+				request(discoverOptions, (error, response, body) => {
+				if (error) throw new Error(error);
+				const discoverBodyJSON = JSON.parse(body)
+						
+			// 		// logic for picking random genre
+					genreIndex= Math.floor(Math.random()*favGenresArray.length)
+					discoverOptions.qs.with_genres = favGenresArray[genreIndex]
+			// 		//this API request gets the genres
+					request(discoverOptions, (error, response, bodyGenre) => {
+						if (error) throw new Error(error);
+						const genreBodyJSON = JSON.parse(bodyGenre)
 
-	// User.findOne({ username: req.session.username }, (err, foundUser) => {
-	// 	if (foundUser) {
-	// 			//this code gets the two array preferences from the foundUser
+			// 			// set the people id search object in these two lines of code
+						const peopleOptionsWithActor = peopleOptions;
+						const actorIndex = Math.floor(Math.random()*favActorArray.length) 
+						peopleOptionsWithActor.qs.query = favActorArray[actorIndex]
+						 
+
+						request(peopleOptionsWithActor, (error, response, bodyPeopleId) => {
+							if (error) throw new Error(error);
+							const discoverIdJSON = JSON.parse(bodyPeopleId)
+			// // 				// set the new discover options object with a person id that is returned in the api call above
+							const discoverOptionsWithCast = discoverOptions;
+							discoverOptionsWithCast.qs.with_cast = discoverIdJSON.results[0].id
+							request(discoverOptionsWithCast, (error, response, bodyActor) => {
+								if (error) throw new Error(error);
+								const actorBodyJSON = JSON.parse(bodyActor)
+									console.log("Top Popular Movie -------------------", discoverBodyJSON.results[0])
+									console.log("Top genre Movie -------------------", genreBodyJSON.results[0])
+									console.log("Top actor Movie -------------------", actorBodyJSON.results[0])
+									res.render("movies/browse.ejs", {
+										mostPop: discoverBodyJSON.results,
+										genre: genreBodyJSON.results,
+										actor: actorBodyJSON.results
+									})
+							})
+						})
+					})
+			})
+
+		} else {
+			console.log(err)
+		}
+					
+			
+
+	})
 
 
-
-	// 				foundUser.favGenres.push(req.body.favActor)
-	// 				foundUser.favActors.push(req.body.favGenre)
-
-
-	// 				console.log(foundUser.favGenres)
-	// 				console.log(foundUser.favActors)
-
-	// 				foundUser.save((err, data) => {
-	// 					res.redirect("/users/preferences")
-	// 				})
-	// 			} else {
-	// 				console.log(err)
-	// 			}
-	// 	})
-
-
-		//mostPop
-		//genre
-		//actor
-
-		// for(let i = 0; i<req.userGenreArray; i++){
-		// 	req.session.userGenreArray[i]
-		// }
-		// for(let j = 0; j<req.userPersonArray; j++){
-		// 	req.session.userPersonArray[i]
-		// }
 
 		
-		request(discoverOptions, (error, response, body) => {
-    	if (error) throw new Error(error);
-			const discoverBodyJSON = JSON.parse(body)
-		//	console.log(discoverBodyJSON)
-		//compareAndFilter(movieBody, discoverBodyJSON)
-		req.session.body = discoverBodyJSON;
-  		});
 
-setTimeout(()=>{
-		res.render("movies/browse.ejs", {
-			mostPop: req.session.body.results,
-			genre: req.session.body.results,
-			actor: req.session.body.results
-		})
 
-    
-}, 2000)
+
 });
 
 
@@ -250,7 +258,6 @@ router.delete("/:id", (req, res) => {
 		if (err) {
 			console.log(err)
 		} else {
-			const OgWatchList = foundUser.moviesToSee
 			foundUser.moviesToSee.splice(index, 1);
 
 			foundUser.save((err, data) => {
