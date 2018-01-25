@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff72501e-c5a4-4e62-94eb-52e0d98a1819" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/movieController.js" afterPath="$PROJECT_DIR$/controllers/movieController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/userController.js" afterPath="$PROJECT_DIR$/controllers/userController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/users/preferences.ejs" afterPath="$PROJECT_DIR$/views/users/preferences.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/showPage.css" afterPath="$PROJECT_DIR$/public/css/showPage.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/movies/show.ejs" afterPath="$PROJECT_DIR$/views/movies/show.ejs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -49,21 +47,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="preferences.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="preferences.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/users/preferences.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="46" column="111" lean-forward="true" selection-start-line="46" selection-start-column="111" selection-end-line="46" selection-end-column="111" />
+            <state relative-caret-position="449">
+              <caret line="41" column="98" lean-forward="true" selection-start-line="41" selection-start-column="98" selection-end-line="41" selection-end-column="98" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="showPage.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="showPage.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/css/showPage.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="72" column="20" lean-forward="true" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+            <state relative-caret-position="452">
+              <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -72,8 +70,8 @@
       <file leaf-file-name="show.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/movies/show.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="790">
-              <caret line="49" column="30" lean-forward="true" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
+            <state relative-caret-position="283">
+              <caret line="36" column="37" lean-forward="true" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -148,9 +146,9 @@
         <option value="$PROJECT_DIR$/public/css/browse.css" />
         <option value="$PROJECT_DIR$/views/movies/browse.ejs" />
         <option value="$PROJECT_DIR$/public/css/preferences.css" />
-        <option value="$PROJECT_DIR$/public/css/showPage.css" />
-        <option value="$PROJECT_DIR$/views/movies/show.ejs" />
         <option value="$PROJECT_DIR$/views/users/preferences.ejs" />
+        <option value="$PROJECT_DIR$/views/movies/show.ejs" />
+        <option value="$PROJECT_DIR$/public/css/showPage.css" />
       </list>
     </option>
   </component>
@@ -377,12 +375,12 @@
       <workItem from="1516383793689" duration="592000" />
       <workItem from="1516384624606" duration="14327000" />
       <workItem from="1516583351754" duration="5416000" />
-      <workItem from="1516649740196" duration="72573000" />
+      <workItem from="1516649740196" duration="73339000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95268000" />
+    <option name="totallyTimeSpent" value="96034000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="221" y="84" width="1438" height="981" extended-state="0" />
@@ -818,26 +816,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/showPage.css">
+    <entry file="file://$PROJECT_DIR$/views/users/preferences.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="72" column="20" lean-forward="true" selection-start-line="72" selection-start-column="20" selection-end-line="72" selection-end-column="20" />
+        <state relative-caret-position="449">
+          <caret line="41" column="98" lean-forward="true" selection-start-line="41" selection-start-column="98" selection-end-line="41" selection-end-column="98" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/movies/show.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="790">
-          <caret line="49" column="30" lean-forward="true" selection-start-line="49" selection-start-column="30" selection-end-line="49" selection-end-column="30" />
+        <state relative-caret-position="283">
+          <caret line="36" column="37" lean-forward="true" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/users/preferences.ejs">
+    <entry file="file://$PROJECT_DIR$/public/css/showPage.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="46" column="111" lean-forward="true" selection-start-line="46" selection-start-column="111" selection-end-line="46" selection-end-column="111" />
+        <state relative-caret-position="452">
+          <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
           <folding />
         </state>
       </provider>

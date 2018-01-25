@@ -41,7 +41,7 @@ body{
     bottom: 20px;
     right: 16px;
 }
-button{
+#submitPostRoute button{
     border:none;
     display: inline-block;
     width: 500px;
@@ -49,13 +49,16 @@ button{
     text-align: right;
     padding: 0;
 }
-button:hover{
+#submitPostRoute button:hover{
     background: none;
 }
-button i{
+#submitPostRoute button i{
     font-size: 20px;
     color: white;
     /*margin-left: 50px;*/
+}
+h6:hover, #submitPostRoute button:hover{
+    color:red;
 }
 h1{
     font-family: 'Monoton', cursive;
@@ -71,7 +74,7 @@ small{
 }
 h3{
     font-size: 20px;
-    padding-right: 15vw;
+    padding-right: 18vw;
 }
 h4{
     font-size: 20px;
@@ -93,10 +96,12 @@ h6{
     /*top: 10px;*/
     /*display: inline;*/
 }
-
-h6:hover, button:hover{
-    color:red;
+.rating{
+    font-size: 20px;
+    margin-top: 5px;
 }
+
+
 p{
     text-align: left;
 }
