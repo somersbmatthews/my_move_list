@@ -1,23 +1,23 @@
-/*.navigation body{*/
-    /*!*margin: 20% auto;*!*/
-    /*text-align: center;*/
-    /*!*font-family: 'Arvo', serif;*!*/
-    /*letter-spacing: 0.1em;*/
-/*}*/
-.navigation nav{
+body{
+    /*margin: 20% auto;*/
+    text-align: center;
+    /*font-family: 'Arvo', serif;*/
+    letter-spacing: 0.1em;
+}
+nav{
     margin: 20px;
     font-size: 30px;
 }
-.navigation nav a {
+nav a {
     text-decoration: none;
     justify-content: space-around;
     padding: 35px;
     color: black;
 }
-.navigation nav a:hover{
+nav a:hover{
     color: #919191;
 }
-.navigation h1{
+h1{
     margin: 10px auto;
     padding-bottom: 100px;
     word-spacing: .3em;
@@ -26,7 +26,7 @@
     font-weight: normal;
     /*font-family: 'Raleway', sans-serif;*/
 }
-.navigation h2{
+h2{
     font-size: 30px;
 }
 button{
@@ -37,6 +37,7 @@ button{
     padding: 3px 25px 3px 25px;
     width: 15vw;
     align-self: center;
+    margin-bottom: 10px;
 }
 button:hover{
     background-color: #007AFF;
