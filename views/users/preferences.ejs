@@ -20,87 +20,35 @@
 
   Favorie Genres: 
 
-  	<%if (genre.length === 0){%>
-  	<form class="prefForm" action="/users/preferences" method="POST">
+  <form class="prefForm" action="/users/preferences" method="POST">
+  	<div name="genre">
+		<% for(let i = 0; i<arrayOfObjects.length; i++){ %>  
+			<input type="checkbox" value=<%=arrayOfObjects[i].id%> name="favGenres"
+				<% for (let j = 0; j < genre.length; j++) { -%>
+					<% if (arrayOfObjects[i].id == genre[j]) { -%>
+						checked
+					<% } -%>
+				<% } -%>
 
- 				<div name="genre">
-	                        	
-	            	<input type="checkbox" value="28" checked>Action</input>
-	            	<input type="checkbox" value="12">Adventure</input>
-	            	<input type="checkbox" value="16">Animation</input>
-	            	<input type="checkbox" value="35">Comedy</input>
-	            	<input type="checkbox" value="80">Crime</input>
-	            	<input type="checkbox" value="99">Documentary</input>
-	            	<input type="checkbox" value="18">Drama</input>
-	            	<input type="checkbox" value="10751">Family</input>
-	            	<input type="checkbox" value="14">Fantasy</input>
-	            	<input type="checkbox" value="36">History</input>
-	            	<input type="checkbox" value="27">Horror</input>
-	            	<input type="checkbox" value="10402">Music</input>
-	            	<input type="checkbox" value="9648">Mystery</input>
-	            	<input type="checkbox" value="10749">Romance</input>
-	            	<input type="checkbox" value="878">Science Fiction</input>
-	            	<input type="checkbox" value="10770">TV Movie</input>
-	            	<input type="checkbox" value="53">Thriller</input>
-	            	<input type="checkbox" value="10752">War</input>
-	            	<input type="checkbox" value="37">Western</input>
+			><%=arrayOfObjects[i].text%></input>
+		<%}%>
 	            
-	            </div>
-
-	  <%}%>
-	          <%if (genre.length =! 0){%>
-
-  	<form class="prefForm" action="/users/preferences" method="POST">
-	         
-
-	          
-
- 				<div name="genre">
-	                        	
-	            	<input type="checkbox" value="28" checked>Action</input>
-	            	<input type="checkbox" value="12">Adventure</input>
-	            	<input type="checkbox" value="16">Animation</input>
-	            	<input type="checkbox" value="35">Comedy</input>
-	            	<input type="checkbox" value="80">Crime</input>
-	            	<input type="checkbox" value="99">Documentary</input>
-	            	<input type="checkbox" value="18">Drama</input>
-	            	<input type="checkbox" value="10751">Family</input>
-	            	<input type="checkbox" value="14">Fantasy</input>
-	            	<input type="checkbox" value="36">History</input>
-	            	<input type="checkbox" value="27">Horror</input>
-	            	<input type="checkbox" value="10402">Music</input>
-	            	<input type="checkbox" value="9648">Mystery</input>
-	            	<input type="checkbox" value="10749">Romance</input>
-	            	<input type="checkbox" value="878">Science Fiction</input>
-	            	<input type="checkbox" value="10770">TV Movie</input>
-	            	<input type="checkbox" value="53">Thriller</input>
-	            	<input type="checkbox" value="10752">War</input>
-	            	<input type="checkbox" value="37">Western</input>
-	            
-	            </div>
-
-	          <%}%>
+    </div>
 
 
-	          <% let placeholder "Favorite Actor/Actress" %>
-	          <%if (actor.length =! 0){%>
-
-	          <%placeholder = actor[0]%>
-
-	          <%}%>
-
-<%if(actor.length != 0){%>
-	<%for(let i = 0; i<actor.length; i++){%>
-	<%=actor[i]%>
-
-	<%}%>
-
-<%}%>
-  Favorite Actor/Actress: <input placeholder="<%=placeholder%>" name="favActor" type="text">
-  <button id="submitPref">Submit</button>	
-</form>
+  	Favorite Actor/Actress: <input placeholder="Actor name" name="favActor" type="text">
+  		<ul>
+  		<% for (let i = 0; i < actor.length; i++) { -%>
+  			<li><%= actor[i] %></li>
+  		<% } -%>
+  		</ul>
+	<button id="submitPref">Submit</button>	
+  </form>
 
 
 
 
-<%include ../partials/moviesfooter.ejs%>
+
+
+
+<% include ../partials/moviesfooter.ejs %>

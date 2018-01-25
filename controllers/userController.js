@@ -2,6 +2,19 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel.js");
 const bcrypt = require("bcrypt")
+const ejsLint = require('ejs-lint');
+
+const getData = () => {
+	let defered = Promise.defer();
+
+	request(movieOptions, (error, response, body) => {
+		if (error) throw new Error(error);
+		const movieBodyJSON = JSON.parse(body)
+
+		defered.resolve(data)
+		return defered.promise
+			})
+}
 
 router.route("/login")
 	.get((req, res) => {
@@ -107,26 +120,9 @@ router.route("/preferences/:index")
 
 router.route("/preferences")
 	.get((req, res) => {
-
-	            	// <input type="checkbox" value="28" checked>Action</input>
-	            	// <input type="checkbox" value="12">Adventure</input>
-	            	// <input type="checkbox" value="16">Animation</input>
-	            	// <input type="checkbox" value="35">Comedy</input>
-	            	// <input type="checkbox" value="80">Crime</input>
-	            	// <input type="checkbox" value="99">Documentary</input>
-	            	// <input type="checkbox" value="18">Drama</input>
-	            	// <input type="checkbox" value="10751">Family</input>
-	            	// <input type="checkbox" value="14">Fantasy</input>
-	            	// <input type="checkbox" value="36">History</input>
-	            	// <input type="checkbox" value="27">Horror</input>
-	            	// <input type="checkbox" value="10402">Music</input>
-	            	// <input type="checkbox" value="9648">Mystery</input>
-	            	// <input type="checkbox" value="10749">Romance</input>
-	            	// <input type="checkbox" value="878">Science Fiction</input>
-	            	// <input type="checkbox" value="10770">TV Movie</input>
-	            	// <input type="checkbox" value="53">Thriller</input>
-	            	// <input type="checkbox" value="10752">War</input>
-	            	// <input type="checkbox" value="37">Western</input>
+	//	const EJSerror  = ejsLint('/users/preferences.ejs');
+		//const parsedEJSerror = JSON.parse(EJSerror);
+	//	console.log("this is ejsError", EJSerror);
 	           
 		const genreObject = [
 			{
@@ -206,17 +202,22 @@ router.route("/preferences")
 				id: "37"
 			}
 		]
+
+	if(req.session.username){
 		User.findOne({ username: req.session.username }, (err, foundUser) => {
 			if (foundUser) {
 
-				console.log(foundUser.favGenres)
-				console.log(foundUser.favActors)
+				// console.log("the user preferences database retrieval is working")
 
-			res.render("users/preferences.ejs", {
-			genre: foundUser.favGenres,
-			actor: foundUser.favActors
+				 console.log("this is found user fav genres object", foundUser.favGenres)
+	//			console.log('this is genre object', genreObject)
 
-			})
+				res.render("users/preferences.ejs", {
+					genre: foundUser.favGenres,
+					actor: foundUser.favActors,
+					arrayOfObjects: genreObject
+
+				})
 
 			} else {
 				console.log(err)
@@ -224,21 +225,26 @@ router.route("/preferences")
 		})
 
 
-		console.log(req.session)
-	})
+		//console.log(req.session)
+	} else {
+		res.redirect('/users/login')
+	}
+
+})
+
 	.post((req, res) => {
 		User.findOne({ username: req.session.username }, (err, foundUser) => {
 			if (foundUser) {
 
-				foundUser.favGenres.push(req.body.favActor)
-				foundUser.favActors.push(req.body.favGenre)
+				for(let i = 0; i < req.body.favGenres.length; i++){
+					foundUser.favGenres.push(req.body.favGenres[i])
+				}
 
-
-				console.log(foundUser.favGenres)
-				console.log(foundUser.favActors)
+				foundUser.favActors.push(req.body.favActor)
 
 				foundUser.save((err, data) => {
-				res.redirect("/users/preferences")
+					// res.send(data);
+					res.redirect("/users/preferences")
 				})
 			} else {
 				console.log(err)
