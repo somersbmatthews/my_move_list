@@ -18,10 +18,15 @@ ul{
     padding: 0;
 
 }
+.results{
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+}
 .container{
     display: inline-flex;
     height: 400px;
-    width: 90vw;
+    width: 30vw;
     /*flex-wrap: nowrap;*/
     /*text-align: center;*/
 }
