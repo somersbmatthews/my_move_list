@@ -29,15 +29,17 @@
     <img id="background" src="https://image.tmdb.org/t/p/w600/<%= body.backdrop_path %>">
     <div class="top">
         <h2><%= body.title %>(<%= year %>)</h2>
+        <form action="/movies/<%= body.id%>" method="POST">
+            <button id="submitPostRoute"><h6><i class="fa fa-heart" aria-hidden="true"></i> Add to list</h6></button>
+        </form>
+
         <small> <%= body.tagline %> </small>
 
 
         <div class="rating">User Rating <i class="fa fa-star-o" aria-hidden="true"></i> <%= body.vote_average %></div>
         <h3>Overview</h3>
         <h4><%= body.overview %></h4>
-        <form action="/movies/<%= body.id%>" method="POST">
-            <button id="submitPostRoute"><h6><i class="fa fa-heart" aria-hidden="true"></i> Add to list</h6></button>
-        </form>
+
         <!--<h6 id="star"><span class="showText">Review </span><i class="fa fa-star" aria-hidden="true"></i></h6>-->
     </div>
 </div>
