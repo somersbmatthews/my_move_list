@@ -33,9 +33,9 @@
             <img id="background" src="https://image.tmdb.org/t/p/w600/<%= body.results[i].backdrop_path %>">
             </a>
             <div class="top">
-                <h2><%= body.results[i].title %>(<%= year %>)</h2>
-                <h3>User Score <%= body.results[i].vote_average %></h3>
-                <p>Overview</p>
+                <h2><%= body.results[i].title %> (<%= year %>)</h2>
+                <p>User Rating <%= body.results[i].vote_average %> <i class="fa fa-star-o" aria-hidden="true"></i></p>
+                <h3>Overview</h3>
                 <h4><%= body.results[i].overview %></h4>
 
             </div>
