@@ -30,14 +30,12 @@
 
 
         <div class="container">
-            <a href="/movies/<%=results[i].id%>">
-            <img id="background" src="https://image.tmdb.org/t/p/w600/<%= results[i].backdrop_path %>">
-            </a>
-            <div class="top">
-                <h3>User Score <%= results[i].vote_average %></h3>
-                <p>Title</p>
-                <h4><%= results[i].title %></h4>
-
+            <div id="background">
+                <div class="top">
+                    <h3>User Score <%= results[i].vote_average %></h3>
+                    <p>Title</p>
+                    <h4><%= results[i].title %></h4>
+                </div>
             </div>
 
             <a href="/movies/<%=results[i].id%>">
