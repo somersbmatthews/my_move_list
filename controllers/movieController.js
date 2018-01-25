@@ -223,7 +223,7 @@ router.get('/:id', (req,res) =>{
             throw new Error(error)
 				}else{
         	// Passing the info from what the user clicked on to their session so we can continue to track it
-        	req.session.body = JSON.parse(body)
+          req.session.body = JSON.parse(body)
           res.render('movies/show.ejs',{
       			body: req.session.body
 				})
@@ -241,6 +241,23 @@ router.post('/:id', (req,res) =>{
 			
 			res.redirect("/movies/"+req.params.id)
 		})
+	})
+})
+
+router.delete("/:id", (req, res) => {
+	const index = req.params.id
+	User.findOne({ username: req.session.username}, (err, foundUser) => {
+		if (err) {
+			console.log(err)
+		} else {
+			const OgWatchList = foundUser.moviesToSee
+			foundUser.moviesToSee.splice(index, 1);
+
+			foundUser.save((err, data) => {
+				if(err) console.log(err);
+				res.redirect("/users/watchlist")
+			})	
+		}
 	})
 })
 
