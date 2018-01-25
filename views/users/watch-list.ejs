@@ -35,6 +35,9 @@
                     <h3>User Score <%= results[i].vote_average %></h3>
                     <p>Title</p>
                     <h4><%= results[i].title %></h4>
+                    <form action="/movies/<%= i%>?_method=DELETE" method="POST">
+                        <button>I have seen this movie</button>
+                    </form>
                 </div>
             </div>
 

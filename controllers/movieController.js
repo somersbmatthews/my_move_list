@@ -244,5 +244,22 @@ router.post('/:id', (req,res) =>{
 	})
 })
 
+router.delete("/:id", (req, res) => {
+	const index = req.params.id
+	User.findOne({ username: req.session.username}, (err, foundUser) => {
+		if (err) {
+			console.log(err)
+		} else {
+			const OgWatchList = foundUser.moviesToSee
+			foundUser.moviesToSee.splice(index, 1);
+
+			foundUser.save((err, data) => {
+				if(err) console.log(err);
+				res.redirect("/users/watchlist")
+			})	
+		}
+	})
+})
+
 
 module.exports = router;
