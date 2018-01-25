@@ -60,8 +60,8 @@ router.get('/browse', (req,res)=>{
 	User.findOne({ username: req.session.username }, (err, foundUser) => {
 		if (foundUser) {
 		
-				const favActorArray = found.User.favActors
-				const favGenresArray = found.User.favGenres
+				const favActorArray = foundUser.favActors
+				const favGenresArray = foundUser.favGenres
 
 
 
@@ -78,7 +78,7 @@ router.get('/browse', (req,res)=>{
 
 
 					// logic for picking random genre
-					discoverOptions.qs.with_genres = Math.floor(Math.rand()*favGenresArray.length)
+					discoverOptions.qs.with_genres = Math.floor(Math.random()*favGenresArray.length)
 					//this API request gets the genres
 					request(discoverOptions, (error, response, bodyGenre) => {
 				    	if (error) throw new Error(error);
@@ -86,7 +86,7 @@ router.get('/browse', (req,res)=>{
 							
 							// set the people id search object in these two lines of code
 							const peopleOptionsWithActor = peopleOptions;
-							peopleOptionsWithActor.qs.query = Math.floor(Math.rand()*favActorsArray.length)
+							peopleOptionsWithActor.qs.query = Math.floor(Math.random()*favActorsArray.length)
 
 
 
