@@ -60,61 +60,54 @@ router.get('/browse', (req,res)=>{
 	User.findOne({ username: req.session.username }, (err, foundUser) => {
 		if (foundUser) {
 		
-				const favActorArray = foundUser.favActors
-				const favGenresArray = foundUser.favGenres
 
-
-
-				} else {
-					console.log(err)
-				}
-					
-
-					request(discoverOptions, (error, response, body) => {
-			    		if (error) throw new Error(error);
-						const discoverBodyJSON = JSON.parse(body)
+			const favActorArray = foundUser.favActors
+			const favGenresArray = foundUser.favGenres
+				request(discoverOptions, (error, response, body) => {
+				if (error) throw new Error(error);
+				const discoverBodyJSON = JSON.parse(body)
 						
-  					
-
-
-					// logic for picking random genre
-					discoverOptions.qs.with_genres = Math.floor(Math.random()*favGenresArray.length)
-					//this API request gets the genres
+			// 		// logic for picking random genre
+					genreIndex= Math.floor(Math.random()*favGenresArray.length)
+					discoverOptions.qs.with_genres = favGenresArray[genreIndex]
+			// 		//this API request gets the genres
 					request(discoverOptions, (error, response, bodyGenre) => {
-				    	if (error) throw new Error(error);
-							const genreBodyJSON = JSON.parse(bodyGenre)
-							
-							// set the people id search object in these two lines of code
-							const peopleOptionsWithActor = peopleOptions;
-							peopleOptionsWithActor.qs.query = Math.floor(Math.random()*favActorsArray.length)
+						if (error) throw new Error(error);
+						const genreBodyJSON = JSON.parse(bodyGenre)
 
+			// 			// set the people id search object in these two lines of code
+						const peopleOptionsWithActor = peopleOptions;
+						const actorIndex = Math.floor(Math.random()*favActorArray.length) 
+						peopleOptionsWithActor.qs.query = favActorArray[actorIndex]
+						 
 
-
-							request(peopleOptionsWithActor, (error, response, bodyPeopleId) => {
-				    		if (error) throw new Error(error);
-								const discoverIdJSON = JSON.parse(bodyPeopleId)
-
-								// set the new discover options object with a person id that is returned in the api call above
-
-								discoverOptionsWithCast.qs.with_cast = discoverIdJSON[0].id
-
-								request(discoverOptionsWithCast, (error, response, bodyActor) => {
-				    			if (error) throw new Error(error);
-									const actorBodyJSON = JSON.parse(bodyActor)
-						
-
-
+						request(peopleOptionsWithActor, (error, response, bodyPeopleId) => {
+							if (error) throw new Error(error);
+							const discoverIdJSON = JSON.parse(bodyPeopleId)
+			// // 				// set the new discover options object with a person id that is returned in the api call above
+							const discoverOptionsWithCast = discoverOptions;
+							discoverOptionsWithCast.qs.with_cast = discoverIdJSON.results[0].id
+							request(discoverOptionsWithCast, (error, response, bodyActor) => {
+								if (error) throw new Error(error);
+								const actorBodyJSON = JSON.parse(bodyActor)
+									console.log("Top Popular Movie -------------------", discoverBodyJSON.results[0])
+									console.log("Top genre Movie -------------------", genreBodyJSON.results[0])
+									console.log("Top actor Movie -------------------", actorBodyJSON.results[0])
 									res.render("movies/browse.ejs", {
 										mostPop: discoverBodyJSON.results,
 										genre: genreBodyJSON.results,
 										actor: actorBodyJSON.results
 									})
-								})
-							});
+							})
+						})
+					})
+			})
 
+		} else {
+			console.log(err)
+		}
 					
-					});
-				  	});
+			
 
 	})
 
