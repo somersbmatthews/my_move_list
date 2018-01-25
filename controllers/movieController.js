@@ -194,13 +194,13 @@ router.post("/results", (req, res) => {
 				}
 			}
 			req.session.body = resultsObj;
-			res.redirect("/movies/browse")
+			res.redirect("/movies/results")
 		} else if (!movieBody) {
 			req.session.body = discoverBody
-			res.redirect("/movies/browse")
+			res.redirect("/movies/results")
 		} else if (movieBody && !otherSearch) {
 			req.session.body = movieBody
-			res.redirect("/movies/browse")
+			res.redirect("/movies/results")
 		}
 	};
 
@@ -241,6 +241,23 @@ router.post('/:id', (req,res) =>{
 			
 			res.redirect("/movies/"+req.params.id)
 		})
+	})
+})
+
+router.delete("/:id", (req, res) => {
+	const index = req.params.id
+	User.findOne({ username: req.session.username}, (err, foundUser) => {
+		if (err) {
+			console.log(err)
+		} else {
+			const OgWatchList = foundUser.moviesToSee
+			foundUser.moviesToSee.splice(index, 1);
+
+			foundUser.save((err, data) => {
+				if(err) console.log(err);
+				res.redirect("/users/watchlist")
+			})	
+		}
 	})
 })
 
