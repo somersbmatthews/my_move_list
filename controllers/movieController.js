@@ -223,7 +223,7 @@ router.get('/:id', (req,res) =>{
             throw new Error(error)
 				}else{
         	// Passing the info from what the user clicked on to their session so we can continue to track it
-        	req.session.body = JSON.parse(body)
+          req.session.body = JSON.parse(body)
           res.render('movies/show.ejs',{
       			body: req.session.body
 				})

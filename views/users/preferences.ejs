@@ -24,58 +24,21 @@
   	<form class="prefForm" action="/users/preferences" method="POST">
 
  				<div name="genre">
-	                        	
-	            	<input type="checkbox" value="28" checked>Action</input>
-	            	<input type="checkbox" value="12">Adventure</input>
-	            	<input type="checkbox" value="16">Animation</input>
-	            	<input type="checkbox" value="35">Comedy</input>
-	            	<input type="checkbox" value="80">Crime</input>
-	            	<input type="checkbox" value="99">Documentary</input>
-	            	<input type="checkbox" value="18">Drama</input>
-	            	<input type="checkbox" value="10751">Family</input>
-	            	<input type="checkbox" value="14">Fantasy</input>
-	            	<input type="checkbox" value="36">History</input>
-	            	<input type="checkbox" value="27">Horror</input>
-	            	<input type="checkbox" value="10402">Music</input>
-	            	<input type="checkbox" value="9648">Mystery</input>
-	            	<input type="checkbox" value="10749">Romance</input>
-	            	<input type="checkbox" value="878">Science Fiction</input>
-	            	<input type="checkbox" value="10770">TV Movie</input>
-	            	<input type="checkbox" value="53">Thriller</input>
-	            	<input type="checkbox" value="10752">War</input>
-	            	<input type="checkbox" value="37">Western</input>
-	            
-	            </div>
+	                <% for(let i; i<genre.length; i++){ %>      	
+	            		<%<input type="checkbox" value="28">Action</input>%>
+	            	<%}%>
+
 
 	  <%}%>
 	          <%if (genre.length =! 0){%>
 
   	<form class="prefForm" action="/users/preferences" method="POST">
 	         
-
-	          
-
  				<div name="genre">
-	                        	
-	            	<input type="checkbox" value="28" checked>Action</input>
-	            	<input type="checkbox" value="12">Adventure</input>
-	            	<input type="checkbox" value="16">Animation</input>
-	            	<input type="checkbox" value="35">Comedy</input>
-	            	<input type="checkbox" value="80">Crime</input>
-	            	<input type="checkbox" value="99">Documentary</input>
-	            	<input type="checkbox" value="18">Drama</input>
-	            	<input type="checkbox" value="10751">Family</input>
-	            	<input type="checkbox" value="14">Fantasy</input>
-	            	<input type="checkbox" value="36">History</input>
-	            	<input type="checkbox" value="27">Horror</input>
-	            	<input type="checkbox" value="10402">Music</input>
-	            	<input type="checkbox" value="9648">Mystery</input>
-	            	<input type="checkbox" value="10749">Romance</input>
-	            	<input type="checkbox" value="878">Science Fiction</input>
-	            	<input type="checkbox" value="10770">TV Movie</input>
-	            	<input type="checkbox" value="53">Thriller</input>
-	            	<input type="checkbox" value="10752">War</input>
-	            	<input type="checkbox" value="37">Western</input>
+
+	            	<% for(let i; i<genre.length; i++){ %>            	
+	            		<input type="checkbox" value="28">Action</input>
+	             	<%}%>
 	            
 	            </div>
 

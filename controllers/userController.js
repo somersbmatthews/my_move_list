@@ -3,6 +3,18 @@ const router = express.Router();
 const User = require("../models/userModel.js");
 const bcrypt = require("bcrypt")
 
+const getData = () => {
+	let defered = Promise.defer();
+
+	request(movieOptions, (error, response, body) => {
+		if (error) throw new Error(error);
+		const movieBodyJSON = JSON.parse(body)
+
+		defered.resolve(data)
+		return defered.promise
+			})
+}
+
 router.route("/login")
 	.get((req, res) => {
 		res.render("users/login.ejs", {
@@ -81,26 +93,6 @@ router.route("/logout")
 
 router.route("/preferences")
 	.get((req, res) => {
-
-	            	// <input type="checkbox" value="28" checked>Action</input>
-	            	// <input type="checkbox" value="12">Adventure</input>
-	            	// <input type="checkbox" value="16">Animation</input>
-	            	// <input type="checkbox" value="35">Comedy</input>
-	            	// <input type="checkbox" value="80">Crime</input>
-	            	// <input type="checkbox" value="99">Documentary</input>
-	            	// <input type="checkbox" value="18">Drama</input>
-	            	// <input type="checkbox" value="10751">Family</input>
-	            	// <input type="checkbox" value="14">Fantasy</input>
-	            	// <input type="checkbox" value="36">History</input>
-	            	// <input type="checkbox" value="27">Horror</input>
-	            	// <input type="checkbox" value="10402">Music</input>
-	            	// <input type="checkbox" value="9648">Mystery</input>
-	            	// <input type="checkbox" value="10749">Romance</input>
-	            	// <input type="checkbox" value="878">Science Fiction</input>
-	            	// <input type="checkbox" value="10770">TV Movie</input>
-	            	// <input type="checkbox" value="53">Thriller</input>
-	            	// <input type="checkbox" value="10752">War</input>
-	            	// <input type="checkbox" value="37">Western</input>
 	           
 		const genreObject = [
 			{
@@ -180,17 +172,19 @@ router.route("/preferences")
 				id: "37"
 			}
 		]
+	if(req.session.username){
 		User.findOne({ username: req.session.username }, (err, foundUser) => {
 			if (foundUser) {
 
 				console.log(foundUser.favGenres)
 				console.log(foundUser.favActors)
 
-			res.render("users/preferences.ejs", {
-			genre: foundUser.favGenres,
-			actor: foundUser.favActors
+				res.render("users/preferences.ejs", {
+					genre: foundUser.favGenres,
+					actor: foundUser.favActors,
+					object: genreObject
 
-			})
+				})
 
 			} else {
 				console.log(err)
@@ -199,7 +193,12 @@ router.route("/preferences")
 
 
 		console.log(req.session)
-	})
+	} else {
+		res.redirect('/users/login')
+	}
+
+})
+
 	.post((req, res) => {
 		User.findOne({ username: req.session.username }, (err, foundUser) => {
 			if (foundUser) {
