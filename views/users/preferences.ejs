@@ -3,6 +3,7 @@
 <head>
 
   <link type="text/css" href="/css/style.css" rel="stylesheet">
+  <link type="text/css" href="/css/preferences.css" rel="stylesheet">
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
@@ -14,21 +15,21 @@
 <%include ../partials/movieshead.ejs%>
 
 
-<h1>Search results for globalresponse</h1>
+<h1>Select preferences</h1>
 
 
 
   Favorie Genres: 
 
   <form class="prefForm" action="/users/preferences" method="POST">
-  	<div name="genre">
+  	<div class="genres" name="genre">
 		<% for(let i = 0; i<arrayOfObjects.length; i++){ %>  
 			<input type="checkbox" value=<%=arrayOfObjects[i].id%> name="favGenres"
-				<% for (let j = 0; j < genre.length; j++) { -%>
-					<% if (arrayOfObjects[i].id == genre[j]) { -%>
+				<% for (let j = 0; j < genre.length; j++) { %>
+					<% if (arrayOfObjects[i].id == genre[j]) { %>
 						checked
-					<% } -%>
-				<% } -%>
+					<% } %>
+				<% } %>
 
 			><%=arrayOfObjects[i].text%></input>
 		<%}%>
@@ -38,9 +39,9 @@
 
   	Favorite Actor/Actress: <input placeholder="Actor name" name="favActor" type="text">
   		<ul>
-  		<% for (let i = 0; i < actor.length; i++) { -%>
+  		<% for (let i = 0; i < actor.length; i++) { %>
   			<li><%= actor[i] %></li>
-  		<% } -%>
+  		<% } %>
   		</ul>
 	<button id="submitPref">Submit</button>	
   </form>
