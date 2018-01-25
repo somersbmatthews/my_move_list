@@ -37,13 +37,17 @@
 
 
   	Favorite Actor/Actress: <input placeholder="Actor name" name="favActor" type="text">
-      <ul>
-  		<% for (let i = 0; i < actor.length; i++) { -%>
-      	<li><%= actor[i] %></li>
-  		<% } -%>
-  		</ul>
 	<button id="submitPref">Submit</button>	
   </form>
+
+  <ul>
+      <% for (let i = 0; i < actor.length; i++) { -%>
+        <form action="/users/preferences/<%= i %>?_method=DELETE" method="POST">
+          <li><%= actor[i] %></li>
+          <button>remove actor</button>
+        </form>
+      <% } -%>
+  </ul>
 
 
 

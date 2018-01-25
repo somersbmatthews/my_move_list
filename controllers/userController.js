@@ -101,11 +101,19 @@ router.route("/logout")
 
 router.route("/preferences/:index")
 	.delete((req, res) => {
-		User.findOne({ username: req.session.username }, { new: true }, (err, foundUser) => {
+		User.findOne({ username: req.session.username }, (err, foundUser) => {
 			if (err) {
 				console.log(err)
 			} else {
-				res.send(foundUser)
+				foundUser.favActors.splice(req.params.index, 1);
+				// res.send(foundUser.favActors)
+				foundUser.save((err, data) => {
+					if (err) {
+						console.log(err)
+					} else {
+						res.redirect("/users/preferences")
+					}
+				})
 			}
 		})
 	})
