@@ -86,6 +86,25 @@ router.route("/logout")
 		res.redirect("/users/login")
 	})
 
+router.route("/preferences/:index")
+	.delete((req, res) => {
+		Users.findOne({ username: req.session.username}, () => {
+			if (err) {
+				console.log(err)
+			} else {
+				foundUser.favActors.splice(req.params.index, 1);
+
+				foundUser.save((err, data) => {
+					if (err) {
+						console.log(err)
+					} else {
+						res.redirect("/preferences")
+					}
+				})
+			}
+		}
+	})
+
 router.route("/preferences")
 	.get((req, res) => {
 
