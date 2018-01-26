@@ -72,7 +72,7 @@ router.get('/browse', (req,res)=>{
 				if (error) throw new Error(error);
 				const discoverBodyJSON = JSON.parse(body)
 				// logic for picking random genre
-				genreIndex= Math.floor(Math.random()*favGenresArray.length)
+				genreIndex = Math.floor(Math.random()*favGenresArray.length)
 				const discoverOptionsWithGenre = discoverOptions
 				discoverOptionsWithGenre.qs.with_genres = favGenresArray[genreIndex]
 				//this API request gets the genres
@@ -90,6 +90,7 @@ router.get('/browse', (req,res)=>{
 							const discoverIdJSON = JSON.parse(bodyPeopleId)
 							console.log("DISCOVERIDJSON --------------------------", discoverIdJSON.results[0].id)
 							// set the new discover options object with a person id that is returned in the api call above
+							const discoverOptionsWithCast = discoverOptions;
 							discoverOptionsWithCast.qs.with_cast = discoverIdJSON.results[0].id
 								request(discoverOptionsWithCast, (error, response, bodyActor) => {
 								if (error) throw new Error(error);
@@ -229,7 +230,7 @@ router.get('/:id', (req,res) =>{
         url: 'https://api.themoviedb.org/3/movie/' + req.params.id,
         qs:
             { language: 'en-US',
-                api_key: apiKey },
+                api_key: process.env.API_KEY },
         body: '{}' };
 
     request(options, function (error, response, body) {
