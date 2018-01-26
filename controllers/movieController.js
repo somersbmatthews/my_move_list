@@ -9,7 +9,6 @@ const discoverOptions = { method: 'GET',
 	    qs: 
 		   { primary_release_year: "",
 		   	 with_genres: "",
-		   	 'vote_average.gte': '',
 		   	 with_cast: "",
 		   	 page: '',
 		     include_video: 'false',
@@ -47,7 +46,8 @@ const movieOptions = { method: 'GET',
 
 router.get('/results', (req,res) => {
 		res.render("movies/results.ejs", {
-		body: req.session.body
+		body: req.session.body,
+		minRating: req.session.minRating
 	})
 
 
@@ -139,7 +139,7 @@ router.post("/results", (req, res) => {
 		discoverOptions.qs.with_cast = req.body.actor
 		discoverOptions.qs.primary_release_year = req.body.releaseYear;
 		discoverOptions.qs.with_genres = req.body.genre;
-		discoverOptions.qs["vote_average.gte"] = req.body.minRating
+		req.session.minRating = req.body.minRating
 		callDiscover(movieBody);
 	}
 
@@ -195,7 +195,6 @@ router.post("/results", (req, res) => {
 		let otherSearch = ""
  		if (discoverOptions.qs.primary_release_year || 
  				discoverOptions.qs.with_genres || 
- 				discoverOptions.qs["vote_average.gte"]||
  				discoverOptions.qs.with_cast) {
 					otherSearch = true
 				} else {
@@ -222,6 +221,7 @@ router.post("/results", (req, res) => {
 			res.redirect("/movies/results")
 		} else if (movieBody && !otherSearch) {
 			req.session.body = movieBody
+			console.log("MovieBody and no other search")
 			res.redirect("/movies/results")
 		}
 	};

@@ -1,37 +1,55 @@
 body{
-    /*margin: 20% auto;*/
     text-align: center;
-    /*font-family: 'Arvo', serif;*/
+    background-color: rgb(250,250,250);
     letter-spacing: 0.1em;
+    width: 100vw;
+    margin: 0;
 }
 nav{
-    margin: 20px;
-    font-size: 30px;
+    padding: 20px;
+    font-size: 30px
+    line-height: 72px;
+    text-align: center;
+    background-color: rgba(200, 200, 200, 5);
+    /*display: flex;*/
+    /*justify-content: space-between;*/
 }
 nav a {
     text-decoration: none;
+    height: 72px;
     justify-content: space-around;
-    padding: 35px;
+    padding-top:24px;
+    padding-bottom:24px;
+    padding-left: 35px; 
+    padding-right:35px;
     color: black;
 }
 nav a:hover{
-    color: #919191;
+    color: white;
+    height: 72px;
+    background-color:rgba(50, 50, 50, 0.7);
 }
 h1{
     margin: 10px auto;
+    /*text-align: center*/
     padding-bottom: 100px;
     word-spacing: .3em;
     font-size: 70px;
     font-family: 'Monoton', cursive;
     font-weight: normal;
-    /*font-family: 'Raleway', sans-serif;*/
 }
 h2{
     font-size: 30px;
 }
+#submitSearch{
+    background-color: #007AFF;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    width: 50%;
+    margin: 0 auto;
+}
 #searchIcon{
-    /*height: 30px;*/
-    /*text-align: right;*/
     border-bottom: 1.5px solid black;
     color: white;
     background-color: #007AFF;
@@ -56,12 +74,12 @@ input, select{
     border-radius: 5px;
 }
 .modal{
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(50,50,50,.9);
     position: fixed;
     top: 0;
     right: 0;
-    height: 60vh;
-    width: 40vw;
+    height: 65vh;
+    width: 37vw;
     z-index: 2;
     overflow: auto;
     display: none;
