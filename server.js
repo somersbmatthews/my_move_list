@@ -4,7 +4,6 @@ const app = express();
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const session = require("express-session");
-
 require("./db/db.js");
 
 let mongoUri = process.env.MONGODB_URI;
@@ -44,8 +43,7 @@ app.get('/*/', (req,res)=>{
 	res.send('your route is messed up')
 })
 
+app.listen(process.env.PORT, () => {
+	console.log('Server running on port: ' + port);
+})
 
-app.listen(port);
-console.log('---------------------------------');
-console.log('Server running on port: ' + port);
-console.log('---------------------------------');

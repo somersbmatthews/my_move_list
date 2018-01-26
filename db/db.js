@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const mongoURI = process.env.MONGODB_URI
 
-mongoose.connect("mongodb://localhost:27017/movielist", {
+mongoose.connect(mongoURI, {
 	// useMongoClient: true
 });
 
