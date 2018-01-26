@@ -62,8 +62,6 @@ router.get('/browse', (req,res)=>{
 	const resetDiscoverOptions = () => {
 		discoverOptions.qs.with_cast = ""
 		discoverOptions.qs.with_genres = ""
-		console.log("Ran reset function")
-		console.log("Discover Object--------------------", discoverOptions)
 	}
 
 		if (foundUser) {
