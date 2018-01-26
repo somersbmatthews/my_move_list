@@ -9,6 +9,12 @@ require("./db/db.js");
 
 
 
+var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/grocery_app_dev';
+
+mongoose.connect(mongoUri);
+
+port = process.env.PORT || 3000;
+
 /*
 Middleware
 */

@@ -3,24 +3,6 @@ const request = require('request');
 const router = express.Router();
 const User = require("../models/userModel.js");
 
-const resetDiscoverOptions = () => {
-	const object = { method: 'GET',
-	    url: 'https://api.themoviedb.org/3/discover/movie',
-	    qs: 
-		   { primary_release_year: "",
-		   	 with_genres: "",
-		   	 'vote_average.gte': '',
-		   	 with_cast: "",
-		   	 page: '',
-		     include_video: 'false',
-		     include_adult: 'false',
-		     sort_by: 'popularity.desc',
-		     language: 'en-US',
-		     api_key: apiKey },
-	    body: '{}',      
-	 	};
-	 	return object;
-}
 
 const discoverOptions = { method: 'GET',
 	    url: 'https://api.themoviedb.org/3/discover/movie',
