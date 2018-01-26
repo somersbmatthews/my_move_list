@@ -7,7 +7,10 @@ const session = require("express-session");
 
 require("./db/db.js");
 
+let mongoUri = process.env.MONGODB_URI;
+mongoose.connect(mongoUri);
 
+port = process.env.PORT;
 
 /*
 Middleware
@@ -42,6 +45,7 @@ app.get('/*/', (req,res)=>{
 })
 
 
-app.listen(3000, () => {
-	console.log("Listening on port 3000");
-})
+app.listen(port);
+console.log('---------------------------------');
+console.log('Server running on port: ' + port);
+console.log('---------------------------------');
