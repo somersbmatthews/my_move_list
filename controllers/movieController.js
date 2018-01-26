@@ -3,7 +3,7 @@ const request = require('request');
 const router = express.Router();
 const User = require("../models/userModel.js");
 
-
+console.log(process.env.API_KEY)
 const discoverOptions = { method: 'GET',
 	    url: 'https://api.themoviedb.org/3/discover/movie',
 	    qs: 
