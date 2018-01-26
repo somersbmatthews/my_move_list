@@ -4,7 +4,6 @@ const User = require("../models/userModel.js");
 const bcrypt = require("bcrypt")
 
 
-
 const getData = () => {
 	let defered = Promise.defer();
 
