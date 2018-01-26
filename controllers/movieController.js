@@ -2,7 +2,6 @@ const express = require('express');
 const request = require('request');
 const router = express.Router();
 const User = require("../models/userModel.js");
-const apiKey = "c6ba51285da546e27050e39e5bf072be";
 
 const discoverOptions = { method: 'GET',
 	    url: 'https://api.themoviedb.org/3/discover/movie',
@@ -15,7 +14,7 @@ const discoverOptions = { method: 'GET',
 		     include_adult: 'false',
 		     sort_by: 'popularity.desc',
 		     language: 'en-US',
-		     api_key: apiKey },
+		     api_key: process.env.API_KEY },
 	    body: '{}',      
 	 	};
 
@@ -26,7 +25,7 @@ const movieOptions = { method: 'GET',
 		     page: '',
 		     query: '',
 		     language: 'en-US',
-		     api_key: apiKey },
+		     api_key: process.env.API_KEY },
 		 	 body: '{}'
 	};
 
@@ -37,7 +36,7 @@ const movieOptions = { method: 'GET',
 		     page: '',
 		     query: '',
 		     language: 'en-US',
-		     api_key: 'c6ba51285da546e27050e39e5bf072be' },
+		     api_key: process.env.API_KEY },
 		 	 body: '{}' 
 	};
 
@@ -93,7 +92,6 @@ router.get('/browse', (req,res)=>{
 						request(peopleOptionsWithActor, (error, response, bodyPeopleId) => {
 							if (error) throw new Error(error);
 							const discoverIdJSON = JSON.parse(bodyPeopleId)
-							console.log(discoverIdJSON.results[0].id)
 			// // 				// set the new discover options object with a person id that is returned in the api call above
 							
 							const discoverOptionsWithCast = discoverOptions;
@@ -221,7 +219,6 @@ router.post("/results", (req, res) => {
 			res.redirect("/movies/results")
 		} else if (movieBody && !otherSearch) {
 			req.session.body = movieBody
-			console.log("MovieBody and no other search")
 			res.redirect("/movies/results")
 		}
 	};
