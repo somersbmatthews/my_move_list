@@ -18,6 +18,7 @@ const getData = () => {
 
 router.route("/login")
 	.get((req, res) => {
+		console.log(process.env.API_KEY, '--------------------------------')
 		res.render("users/login.ejs", {
 			message: req.session.message
 		})
