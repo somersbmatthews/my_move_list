@@ -2,7 +2,6 @@ const express = require('express');
 const request = require('request');
 const router = express.Router();
 const User = require("../models/userModel.js");
-const apiKey = "c6ba51285da546e27050e39e5bf072be";
 
 const resetDiscoverOptions = () => {
 	const object = { method: 'GET',
@@ -28,14 +27,13 @@ const discoverOptions = { method: 'GET',
 	    qs: 
 		   { primary_release_year: "",
 		   	 with_genres: "",
-		   	 'vote_average.gte': '',
 		   	 with_cast: "",
 		   	 page: '',
 		     include_video: 'false',
 		     include_adult: 'false',
 		     sort_by: 'popularity.desc',
 		     language: 'en-US',
-		     api_key: apiKey },
+		     api_key: process.env.API_KEY },
 	    body: '{}',      
 	 	};
 
@@ -46,7 +44,7 @@ const movieOptions = { method: 'GET',
 		     page: '',
 		     query: '',
 		     language: 'en-US',
-		     api_key: apiKey },
+		     api_key: process.env.API_KEY },
 		 	 body: '{}'
 	};
 
@@ -57,7 +55,7 @@ const movieOptions = { method: 'GET',
 		     page: '',
 		     query: '',
 		     language: 'en-US',
-		     api_key: 'c6ba51285da546e27050e39e5bf072be' },
+		     api_key: process.env.API_KEY },
 		 	 body: '{}' 
 	};
 
@@ -66,7 +64,8 @@ const movieOptions = { method: 'GET',
 
 router.get('/results', (req,res) => {
 		res.render("movies/results.ejs", {
-		body: req.session.body
+		body: req.session.body,
+		minRating: req.session.minRating
 	})
 
 
@@ -77,41 +76,54 @@ router.get('/browse', (req,res)=>{
 
 	// this mongoose method 
 	User.findOne({ username: req.session.username }, (err, foundUser) => {
+		
+	const resetDiscoverOptions = () => {
+		discoverOptions.qs.with_cast = ""
+		discoverOptions.qs.with_genres = ""
+	}
+
 		if (foundUser) {
 		
 
 			const favActorArray = foundUser.favActors
 			const favGenresArray = foundUser.favGenres
+
 				request(discoverOptions, (error, response, body) => {
 				if (error) throw new Error(error);
 				const discoverBodyJSON = JSON.parse(body)
 						
 			// 		// logic for picking random genre
 					genreIndex= Math.floor(Math.random()*favGenresArray.length)
-					discoverOptions.qs.with_genres = favGenresArray[genreIndex]
+					const discoverOptionsWithGenre = discoverOptions
+					discoverOptionsWithGenre.qs.with_genres = favGenresArray[genreIndex]
 			// 		//this API request gets the genres
-					request(discoverOptions, (error, response, bodyGenre) => {
+
+					request(discoverOptionsWithGenre, (error, response, bodyGenre) => {
 						if (error) throw new Error(error);
+						resetDiscoverOptions();
 						const genreBodyJSON = JSON.parse(bodyGenre)
 
 			// 			// set the people id search object in these two lines of code
-						const peopleOptionsWithActor = peopleOptions;
+						const peopleOptionsWithActor =  peopleOptions;
 						const actorIndex = Math.floor(Math.random()*favActorArray.length) 
 						peopleOptionsWithActor.qs.query = favActorArray[actorIndex]
-						 
+						
 
 						request(peopleOptionsWithActor, (error, response, bodyPeopleId) => {
 							if (error) throw new Error(error);
 							const discoverIdJSON = JSON.parse(bodyPeopleId)
 			// // 				// set the new discover options object with a person id that is returned in the api call above
+							
 							const discoverOptionsWithCast = discoverOptions;
 							discoverOptionsWithCast.qs.with_cast = discoverIdJSON.results[0].id
+
 							request(discoverOptionsWithCast, (error, response, bodyActor) => {
 								if (error) throw new Error(error);
+								resetDiscoverOptions();
 								const actorBodyJSON = JSON.parse(bodyActor)
-									console.log("Top Popular Movie -------------------", discoverBodyJSON.results[0])
-									console.log("Top genre Movie -------------------", genreBodyJSON.results[0])
-									console.log("Top actor Movie -------------------", actorBodyJSON.results[0])
+									
+									
+									
 									res.render("movies/browse.ejs", {
 										mostPop: discoverBodyJSON.results,
 										genre: genreBodyJSON.results,
@@ -145,7 +157,7 @@ router.post("/results", (req, res) => {
 		discoverOptions.qs.with_cast = req.body.actor
 		discoverOptions.qs.primary_release_year = req.body.releaseYear;
 		discoverOptions.qs.with_genres = req.body.genre;
-		discoverOptions.qs["vote_average.gte"] = req.body.minRating
+		req.session.minRating = req.body.minRating
 		callDiscover(movieBody);
 	}
 
@@ -201,7 +213,6 @@ router.post("/results", (req, res) => {
 		let otherSearch = ""
  		if (discoverOptions.qs.primary_release_year || 
  				discoverOptions.qs.with_genres || 
- 				discoverOptions.qs["vote_average.gte"]||
  				discoverOptions.qs.with_cast) {
 					otherSearch = true
 				} else {

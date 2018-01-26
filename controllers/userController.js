@@ -71,7 +71,7 @@ router.route("/register")
 						console.log(err);
 						res.send(err);
 					} else {
-						console.log(createdUser);
+						// console.log(createdUser);
 						res.redirect("/users/preferences")
 					}
 				})
@@ -205,7 +205,7 @@ router.route("/preferences")
 			if (foundUser) {
 
 
-				 console.log("this is found user fav genres object", foundUser.favGenres)
+				 // console.log("this is found user fav genres object", foundUser.favGenres)
 
 
 				res.render("users/preferences.ejs", {
