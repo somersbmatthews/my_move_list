@@ -6,10 +6,9 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 require("./db/db.js");
 
-let mongoUri = process.env.MONGODB_URI;
-mongoose.connect(mongoUri);
 
-port = process.env.PORT;
+
+
 
 /*
 Middleware
