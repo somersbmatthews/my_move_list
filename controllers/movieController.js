@@ -92,10 +92,12 @@ router.get('/browse', (req,res)=>{
 						request(peopleOptionsWithActor, (error, response, bodyPeopleId) => {
 							if (error) throw new Error(error);
 							const discoverIdJSON = JSON.parse(bodyPeopleId)
+							console.log("DISCOVERIDJSON --------------------------", discoverIdJSON.results[0].personId)
 			// // 				// set the new discover options object with a person id that is returned in the api call above
 							
 							const discoverOptionsWithCast = discoverOptions;
 							discoverOptionsWithCast.qs.with_cast = discoverIdJSON.results[0].id
+							console.log("DISCOVEROPTIONS WITH CAST ---------------------------------",discoverOptionsWithCast)
 
 							request(discoverOptionsWithCast, (error, response, bodyActor) => {
 								if (error) throw new Error(error);
