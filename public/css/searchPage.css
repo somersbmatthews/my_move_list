@@ -2,7 +2,8 @@
     width: 300px;
     position: absolute;
     opacity: 1;
-    left: 100px;
+    left: 50px;
+    top: 500px;
     margin: -480px auto;
     z-index: 1;
 }
@@ -21,7 +22,7 @@
 .top {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 0; 
     /*right: 6px;*/
     width: 100%;
     height: 100%;
@@ -48,6 +49,7 @@ h1{
 }
 h2{
     font-size: 40px;
+    padding-right: 10px;
     /*font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));*/
 }
 small{
@@ -62,6 +64,7 @@ h4{
     text-align: center;
     max-width: 45vw;
     padding-left: 55vw;
+    padding-right: 10px;
     /*width: 60vw;*/
 }
 h5{
@@ -82,4 +85,5 @@ select{
 }
 p{
     font-size: 20px;
+    padding-right: 10px;
 }

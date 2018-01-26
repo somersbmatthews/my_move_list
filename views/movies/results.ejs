@@ -14,15 +14,18 @@
 <% include ../partials/movieshead.ejs %>
 
 
-<link type="text/css" href="/css/searchPage.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
-
 <script src="https://use.fontawesome.com/d37a5741c5.js"></script>
 
 <h1> Search Results</h1>
 
+
+    
+    
+
+
 <% if(body.results.length != 0){ %>
     <% for (let i = 0; i < body.results.length; i++) { %>
+    <% if (body.results[i].vote_average >= minRating ) { -%>
           
           <% let date = body.results[i].release_date %>
          <% let year = date.slice(0,4) %>
@@ -45,6 +48,7 @@
             </a>
 
         </div>
+        <% } -%>
         <% } %>
     <% } %>
 
