@@ -36,6 +36,10 @@ app.use("/users", userController)
 const movieController = require("./controllers/movieController.js");
 app.use("/movies", movieController)
 
+app.get("/", (req,res) => {
+	res.redirect("/users/login")
+})
+
 app.get('/*/', (req,res)=>{
 	res.send('your route is messed up')
 })
