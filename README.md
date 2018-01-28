@@ -31,6 +31,10 @@
 * See other users ratings and reviews on the movie specific pages 
 * Able to add additional criteria to preferences  
 
+
+###### This website is available for use at: 
+https://my-movie-list-sierra.herokuapp.com/users/register
+
 ![Alt Text](my_movie_list.png)
 
 
