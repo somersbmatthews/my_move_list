@@ -31,5 +31,7 @@
 * See other users ratings and reviews on the movie specific pages 
 * Able to add additional criteria to preferences  
 
+![Alt Text](my_movie_list.png)
+
 
  
