@@ -35,7 +35,13 @@
 ###### This website is available for use at: 
 https://my-movie-list-sierra.herokuapp.com/users/register
 
-![Alt Text](my_movie_list.png)
+![Browse Page](my_movie_list.png)
+
+
+###### Wireframes
+![User Flow Wireframes](wireframes/.user_flow.JPG)
+![MVP Goals](wireframes/.mvp_goals.JPG)
+![Stretch Goals](wireframes/.stretch_goals.JPG)
 
 
  
