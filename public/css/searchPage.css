@@ -45,7 +45,7 @@ h1{
     font-family: 'Monoton', cursive;
     font-weight: normal;
     max-width: 100px;
-    /*text-align: center;*/
+    text-align: center;
 }
 h2{
     font-size: 40px;

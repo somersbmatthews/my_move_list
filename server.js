@@ -8,6 +8,8 @@ require("./db/db.js");
 
 
 
+
+
 /*
 Middleware
 */
@@ -44,7 +46,7 @@ app.get('/*/', (req,res)=>{
 	res.send('your route is messed up')
 })
 
-
 app.listen(process.env.PORT, () => {
-	console.log("Listening on port");
+	console.log('Server running on port: ' + process.env.PORT);
 })
+
