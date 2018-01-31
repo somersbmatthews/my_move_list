@@ -38,7 +38,7 @@ https://my-movie-list-sierra.herokuapp.com/users/register
 ![Browse Page](my_movie_list.png)
 
 
-###### Wireframes
+### Wireframes
 ![User Flow Wireframes](wireframes/user_flow.JPG)
 ![MVP Goals](wireframes/mvp_goals.JPG)
 ![Stretch Goals](wireframes/stretch_goals.JPG)
