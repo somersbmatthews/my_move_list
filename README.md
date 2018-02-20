@@ -21,10 +21,10 @@
 </p>
 
 #### Who created this project and why?
-The following collaborators contributed to this project: 
-	Anthony Lower @ https://github.com/anthonyjlower  
-	Sierra Moore @ https://github.com/sierramoore
-	Somers Matthews @ https://github.com/somersbmatthews
+The following collaborators contributed to this project:   
+	Anthony Lower @ https://github.com/anthonyjlower    
+	Sierra Moore @ https://github.com/sierramoore  
+	Somers Matthews @ https://github.com/somersbmatthews  
 
 We wanted to create a CRUD app that allows for multiple API calls in sequence that provide useful information to the user.
 
