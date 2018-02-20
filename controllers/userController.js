@@ -30,7 +30,7 @@ router.route("/login")
 					req.session.username = foundUser.username;
 					req.session.logged = true;
 					req.session.message = "";
-					res.redirect("/movies/browse")
+					res.redirect("/users/preferences")
 				} else {
 					req.session.message = "Incorrect password or username";
 					res.redirect("/users/login");

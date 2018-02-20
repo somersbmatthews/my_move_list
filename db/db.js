@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-
-var mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/grocery_app_dev';
-
+const mongoURI  = process.env.MONGODB_URI;
 
 
-mongoose.connect(mongoUri);
+mongoose.connect(mongoURI || "mongodb://localhost:27017/movielist", {
+	// useMongoClient: true
+});
 
 mongoose.connection.on("connected", () => {
 	console.log("Mongodb is connected")
