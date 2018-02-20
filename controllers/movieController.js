@@ -3,7 +3,7 @@ const request = require('request');
 const router = express.Router();
 const User = require("../models/userModel.js");
 
-console.log(process.env.API_KEY)
+
 const discoverOptions = { method: 'GET',
 	    url: 'https://api.themoviedb.org/3/discover/movie',
 	    qs: 
@@ -56,6 +56,7 @@ router.get('/results', (req,res) => {
 router.get('/browse', (req,res)=>{
 
 
+
 	// this mongoose method 
 	User.findOne({ username: req.session.username }, (err, foundUser) => {
 		
@@ -92,7 +93,7 @@ router.get('/browse', (req,res)=>{
 						
 
 						request(peopleOptionsWithActor, (error, response, bodyPeopleId) => {
-							if (error) throw new Error(error);
+							if (error) throw new Error(error, 'error');
 							const discoverIdJSON = JSON.parse(bodyPeopleId)
 			// // 				// set the new discover options object with a person id that is returned in the api call above
 							
