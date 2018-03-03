@@ -3,6 +3,7 @@ const request = require('request');
 const router = express.Router();
 const User = require("../models/userModel.js");
 
+
 const discoverOptions = { method: 'GET',
 	    url: 'https://api.themoviedb.org/3/discover/movie',
 	    qs: 
@@ -55,6 +56,7 @@ router.get('/results', (req,res) => {
 router.get('/browse', (req,res)=>{
 
 
+
 	// this mongoose method 
 	User.findOne({ username: req.session.username }, (err, foundUser) => {
 		
@@ -63,10 +65,12 @@ router.get('/browse', (req,res)=>{
 		discoverOptions.qs.with_genres = ""
 	}
 
+
 	if (foundUser) {
 
 		const favActorArray = foundUser.favActors
 		const favGenresArray = foundUser.favGenres
+
 
 			request(discoverOptions, (error, response, body) => {
 				if (error) throw new Error(error);
@@ -81,21 +85,26 @@ router.get('/browse', (req,res)=>{
 					resetDiscoverOptions();
 					const genreBodyJSON = JSON.parse(bodyGenre)
 					// set the people id search object in these two lines of code
+
+					// CHANGE THIS SO IT IS NOT A .LENGTH SO if(favActorArray != []) THIS IS WHERE THE ERROR IS HAPPENING RIGHT?
 					if (favActorArray.length != 0) {
 						const peopleOptionsWithActor =  peopleOptions;
 						const actorIndex = Math.floor(Math.random()*favActorArray.length) 
 						peopleOptionsWithActor.qs.query = favActorArray[actorIndex]
+						
 						request(peopleOptionsWithActor, (error, response, bodyPeopleId) => {
-							if (error) throw new Error(error);
+							if (error) throw new Error(error, 'error');
 							const discoverIdJSON = JSON.parse(bodyPeopleId)
 							console.log("DISCOVERIDJSON --------------------------", discoverIdJSON.results[0].id)
 							// set the new discover options object with a person id that is returned in the api call above
 							const discoverOptionsWithCast = discoverOptions;
 							discoverOptionsWithCast.qs.with_cast = discoverIdJSON.results[0].id
+								
 								request(discoverOptionsWithCast, (error, response, bodyActor) => {
 								if (error) throw new Error(error);
 								resetDiscoverOptions();
 								const actorBodyJSON = JSON.parse(bodyActor)
+								
 									res.render("movies/browse.ejs", {
 										mostPop: discoverBodyJSON.results,
 										genre: genreBodyJSON.results,
@@ -106,11 +115,13 @@ router.get('/browse', (req,res)=>{
 					} else {
 							const discoverOptionsWithCast = discoverOptions;
 							console.log("DISCOVEROPTIONS WITH CAST ---------------------------------",discoverOptionsWithCast)
+							
 							request(discoverOptionsWithCast, (error, response, bodyActor) => {
 								if (error) throw new Error(error);
 								resetDiscoverOptions();
 								const actorBodyJSON = JSON.parse(bodyActor)
 								console.log("ACTOR BODY JSON ------------------------------", actorBodyJSON)
+							
 									res.render("movies/browse.ejs", {
 										mostPop: discoverBodyJSON.results,
 										genre: genreBodyJSON.results,

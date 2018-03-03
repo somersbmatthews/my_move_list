@@ -4,11 +4,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const session = require("express-session");
+
 require("./db/db.js");
-
-
-
-
 
 /*
 Middleware
@@ -49,4 +46,3 @@ app.get('/*/', (req,res)=>{
 app.listen(process.env.PORT, () => {
 	console.log('Server running on port: ' + process.env.PORT);
 })
-

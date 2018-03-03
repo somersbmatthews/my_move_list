@@ -4,7 +4,6 @@ const User = require("../models/userModel.js");
 const bcrypt = require("bcrypt")
 
 
-
 const getData = () => {
 	let defered = Promise.defer();
 
@@ -19,6 +18,7 @@ const getData = () => {
 
 router.route("/login")
 	.get((req, res) => {
+		console.log(process.env.API_KEY, '--------------------------------')
 		res.render("users/login.ejs", {
 			message: req.session.message
 		})

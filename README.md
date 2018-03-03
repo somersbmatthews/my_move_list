@@ -21,6 +21,12 @@
 </p>
 
 #### Who created this project and why?
+The following collaborators contributed to this project:   
+	Anthony Lower @ https://github.com/anthonyjlower    
+	Sierra Moore @ https://github.com/sierramoore  
+	Somers Matthews @ https://github.com/somersbmatthews  
+
+We wanted to create a CRUD app that allows for multiple API calls in sequence that provide useful information to the user.
 
 
 ##### Future Goals:
@@ -35,7 +41,15 @@
 ###### This website is available for use at: 
 https://my-movie-list-sierra.herokuapp.com/users/register
 
-![Alt Text](my_movie_list.png)
+The project repo for this website is at: https://github.com/sierramoore/my_movie_list
+
+![Browse Page](my_movie_list.png)
+
+
+### Wireframes
+![User Flow Wireframes](wireframes/user_flow.JPG)
+![MVP Goals](wireframes/mvp_goals.JPG)
+![Stretch Goals](wireframes/stretch_goals.JPG)
 
 
  
