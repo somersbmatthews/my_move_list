@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+    <link type="text/css" href="/css/style.css" rel="stylesheet">
+    <link type="text/css" href="/css/searchPage.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+    <script src="https://use.fontawesome.com/d37a5741c5.js"></script>
+</head>
+
+<% include ../partials/movieshead.ejs %>
+
+
+<link type="text/css" href="/css/searchPage.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+
+<script src="https://use.fontawesome.com/d37a5741c5.js"></script>
+
+<div class="hONe-holder">
+    <h1>Your Watchlist</h1>
+</div>
+
+<% if(results.length != 0){ %>
+    <% for (let i = 0; i < results.length; i++) { %>
+        
+           
+
+
+
+
+        <div class="container">
+            <div id="background">
+                <div class="top">
+                    <h3>User Score <%= results[i].vote_average %></h3>
+                    <p>Title</p>
+                    <h4><%= results[i].title %></h4>
+                    <form action="/movies/<%= i%>?_method=DELETE" method="POST">
+                        <button>I have seen this movie</button>
+                    </form>
+                </div>
+            </div>
+
+            <a href="/movies/<%=results[i].id%>">
+                <img id="poster" src="https://image.tmdb.org/t/p/w300/<%= results[i].poster_path %>">
+            </a>
+
+        </div>
+        <% } %>
+    <% } %>
+
+    <h2>Add more movies to your watch list!</h2>
+
+<% include ../partials/moviesfooter.ejs %>

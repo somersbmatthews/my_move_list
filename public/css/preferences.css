@@ -1,0 +1,18 @@
+body{
+
+}
+.genres{
+    margin: 5px 15vw;
+    border-top: 1px solid black;
+    /*border-bottom: 1px solid black;*/
+}
+.actor{
+    margin: 5px 15vw;
+    padding-top: 10px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+ul{
+	list-style-type: none;
+	padding: 0;
+}

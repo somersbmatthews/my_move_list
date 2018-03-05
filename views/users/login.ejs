@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <link type="text/css" href="/css/style.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+</head>
+<body>
+
+<h1>My Movie List</h1>
+
+<p><font color="red"><%= message %></font></p>
+
+<h2>Log In</h2>
+
+<form action="/users/login" method="post">
+    <input type="text" name="username" placeholder="username"><br><br>
+    <input type="password" name="password" placeholder="password" id="next"><br><br>
+    <button>Login</button>
+</form>
+
+
+ <a href="/users/register"><small>Need an Account? Register</small></a>
+
+
+</body>
+</html>

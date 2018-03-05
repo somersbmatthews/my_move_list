@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+
+	<link type="text/css" href="/css/style.css" rel="stylesheet">
+	<link type="text/css" href="/css/browse.css" rel="stylesheet">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+	<script src="https://use.fontawesome.com/d37a5741c5.js"></script>
+</head>
+<body>
+
+<%include ../partials/movieshead.ejs%>
+
+
+
+<h1>Browse Movies</h1>
+
+<div class=results>
+	<div class="container">
+		<h2 class=result-label>Popular</h2>
+		<ul>
+      <% for (let i = 0; i < mostPop.length; i++) { %>
+
+      <% let date = mostPop[i].release_date %>
+      <% let year = date.slice(0, 4) %>
+
+				<li>
+					<h2><%= mostPop[i].title %> (<%= year %>)</h2>
+					<a href="/movies/<%= mostPop[i].id %>">
+						<span class="topSlide"><img id="poster" src="https://image.tmdb.org/t/p/w300/<%= mostPop[i].poster_path %>"></span>
+					</a>
+				</li>
+
+			<% } %>
+		</ul>
+	</div>
+
+	<div class="container">
+		<h2 class=result-label>By Genre</h2>
+		<ul>
+      <% for (let i = 0; i < genre.length; i++) { %>
+
+      <% let date = genre[i].release_date %>
+      <% let year = date.slice(0, 4) %>
+
+				<li>
+					<h2><%= genre[i].title %> (<%= year %>)</h2>
+					<a href="/movies/<%= genre[i].id %>">
+						<span class="topSlide"><img id="poster" src="https://image.tmdb.org/t/p/w300/<%= genre[i].poster_path %>"></span>
+					</a>
+				</li>
+
+			<% } %>
+		</ul>
+	</div>
+
+	<div class="container">
+		<h2 class=result-label>By Actor</h2>
+		<ul>
+      <% for (let i = 0; i < actor.length; i++) { %>
+
+      <% let date = actor[i].release_date %>
+      <% let year = date.slice(0, 4) %>
+
+				<li>
+					<h2><%= actor[i].title %> (<%= year %>)</h2>
+					<a href="/movies/<%= actor[i].id %>">
+						<span class="topSlide"><img id="poster" src="https://image.tmdb.org/t/p/w300/<%= actor[i].poster_path %>"></span>
+					</a>
+				</li>
+
+			<% } %>
+		</ul>
+	</div>
+</div>
+
+
+<%include ../partials/moviesfooter.ejs%>

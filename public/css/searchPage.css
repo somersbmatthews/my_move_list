@@ -1,0 +1,89 @@
+#poster{
+    width: 300px;
+    position: absolute;
+    opacity: 1;
+    left: 50px;
+    top: 500px;
+    margin: -480px auto;
+    z-index: 1;
+}
+#background {
+    width: 99vw;
+    height: 500px;
+    /*background: rgba(139, 0, 139, 0.6);*/
+    opacity: 0.6;
+    position: relative;
+}
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.top {
+    position: absolute;
+    top: 0;
+    left: 0; 
+    /*right: 6px;*/
+    width: 100%;
+    height: 100%;
+    font-size: 60px;
+    text-align: right;
+    background-color: rgba(50, 0, 50, 0.7);
+}
+.middle{
+    position: absolute;
+    top: 8px;
+    bottom: 20px;
+    right: 16px;
+}
+button i{
+    font-size: 20px;
+    color: white;
+    margin-left: 50px;
+}
+h1{
+    font-family: 'Monoton', cursive;
+    font-weight: normal;
+    max-width: 100px;
+    text-align: center;
+}
+h2{
+    font-size: 40px;
+    padding-right: 10px;
+    /*font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));*/
+}
+small{
+    font-size: 30px;
+}
+h3{
+    font-size: 30px;
+    padding-right: 18vw;
+}
+h4{
+    font-size: 20px;
+    text-align: center;
+    max-width: 45vw;
+    padding-left: 55vw;
+    padding-right: 10px;
+    /*width: 60vw;*/
+}
+h5{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+}
+/*heart icon*/
+h6{
+    font-size: 20px;
+    margin-right: 0;
+    text-align: right;
+    /*top: 10px;*/
+    /*display: inline;*/
+}
+select{
+    text-align: center;
+}
+p{
+    font-size: 20px;
+    padding-right: 10px;
+}
