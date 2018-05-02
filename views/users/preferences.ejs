@@ -24,9 +24,9 @@
 
   <form class="prefForm" action="/users/preferences" method="POST">
   	<div class="genres" name="genre">
-		<% "use strict" for(let i = 0; i<arrayOfObjects.length; i++){ %>  
+		<%  for(let i = 0; i<arrayOfObjects.length; i++){ %>  
 			<input type="checkbox" value=<%=arrayOfObjects[i].id%> name="favGenres"
-				<% "use strict" for (let j = 0; j < genre.length; j++) { %>
+				<%  for(let j = 0; j < genre.length; j++) { %>
 					<% if (arrayOfObjects[i].id == genre[j]) { %>
 						checked
 					<% } %>
@@ -46,7 +46,7 @@
   </div>
 
   <ul>
-      <% "use strict" for (let i = 0; i < actor.length; i++) { %>
+      <%  for(let i = 0; i < actor.length; i++) { %>
         <form action="/users/preferences/<%= i %>?_method=DELETE" method="POST">
           <li><%= actor[i] %></li>
           <button>remove actor</button>
