@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt")
 
 
 const getData = () => {
-	let defered = Promise.defer();
+	const defered = Promise.defer();
 
 	request(movieOptions, (error, response, body) => {
 		if (error) throw new Error(error);
