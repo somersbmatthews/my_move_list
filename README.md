@@ -1,18 +1,20 @@
 ## My Movie List
+##### This website is available for use at: 
+https://my-movie-list-sierra.herokuapp.com/users/register
+
 
 #### What is this?
 <p>This was created so a user can store and manage a list of all of the movies they want to be able to see. </p>
 
-<p>
-	After creating an account a user is able to:
-	• Set their favorite genres, actors, actresses, directors, producers, in preferences
-	• A user is shown a random selection of popular movies, their favorite genres, and their favorite actors in the browse page
-	• A user can search for movies off of a variety of criteria (title keywords, genre, minimum rating, person keywords)
-	• Users can click on specific titles to view more information about the movie
-	• Users can add movies to their watch list to keep track of their favorites
-	• Users can manage their watchlist be removing movies they have seen.
 
-</p>
+#### After creating an account a user is able to:
+* Set their favorite genres, actors, actresses, directors, producers, in preferences
+* A user is shown a random selection of popular movies, their favorite genres, and their favorite actors in the browse page
+* A user can search for movies off of a variety of criteria (title keywords, genre, minimum rating, person keywords)
+* Users can click on specific titles to view more information about the movie
+* Users can add movies to their watch list to keep track of their favorites
+* Users can manage their watchlist be removing movies they have seen.
+
 
 #### What technologies were used?
 <p>We used, JavaScript, Node.js, Css, EJS, Mongoose, Express.js, MongoDB, and a movie database API (see below).
@@ -38,8 +40,7 @@ We wanted to create a CRUD app that allows for multiple API calls in sequence th
 * Able to add additional criteria to preferences  
 
 
-###### This website is available for use at: 
-https://my-movie-list-sierra.herokuapp.com/users/register
+
 
 The project repo for this website is at: https://github.com/sierramoore/my_movie_list
 
