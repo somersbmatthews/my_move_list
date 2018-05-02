@@ -196,7 +196,7 @@ router.post("/results", (req, res) => {
 
 	
 	const compareAndFilter = (movieBody, discoverBody) => {
-		
+		"use strict";
 		let otherSearch = ""
  		if (discoverOptions.qs.primary_release_year || 
  				discoverOptions.qs.with_genres || 
@@ -237,6 +237,7 @@ setMovieObject();
 
 //route to single movie info
 router.get('/:id', (req,res) =>{
+	"use strict";
     let options = { method: 'GET',
         url: 'https://api.themoviedb.org/3/movie/' + req.params.id,
         qs:
