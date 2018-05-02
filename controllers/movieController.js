@@ -15,7 +15,7 @@ const discoverOptions = { method: 'GET',
 		     include_adult: 'false',
 		     sort_by: 'popularity.desc',
 		     language: 'en-US',
-		     api_key: process.env.API_KEY },
+		     api_key: process.env.MOVIES_API_KEY },
 	    body: '{}',      
 	 	};
 
@@ -26,7 +26,7 @@ const movieOptions = { method: 'GET',
 		     page: '',
 		     query: '',
 		     language: 'en-US',
-		     api_key: process.env.API_KEY },
+		     api_key: process.env.MOVIES_API_KEY },
 		 	 body: '{}'
 	};
 
@@ -37,7 +37,7 @@ const movieOptions = { method: 'GET',
 		     page: '',
 		     query: '',
 		     language: 'en-US',
-		     api_key: process.env.API_KEY },
+		     api_key: process.env.MOVIES_API_KEY },
 		 	 body: '{}' 
 	};
 
@@ -242,7 +242,7 @@ router.get('/:id', (req,res) =>{
         url: 'https://api.themoviedb.org/3/movie/' + req.params.id,
         qs:
             { language: 'en-US',
-                api_key: process.env.API_KEY },
+                api_key: process.env.MOVIES_API_KEY },
         body: '{}' };
 
     request(options, function (error, response, body) {
